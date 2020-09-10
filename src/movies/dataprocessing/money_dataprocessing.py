@@ -1,6 +1,6 @@
 import pandas as pd
 
-from utils import CURRENCY_VALUES
+from movies.utils import CURRENCY_VALUES
 
 
 def determine_currencies(df: pd.DataFrame, money_column: str) -> pd.DataFrame:

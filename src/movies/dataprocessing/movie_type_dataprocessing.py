@@ -1,4 +1,4 @@
-from utils import TYPE_DATA
+from movies.utils import TYPE_DATA
 
 import pandas as pd
 
