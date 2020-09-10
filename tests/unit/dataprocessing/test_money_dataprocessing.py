@@ -1,6 +1,6 @@
 import pytest
 
-from movies.dataprocessing.dataprocessing_money import (
+from movies.dataprocessing.money_dataprocessing import (
     determine_currencies,
     convert_money_columns,
 )
