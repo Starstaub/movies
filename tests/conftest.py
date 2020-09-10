@@ -10,3 +10,17 @@ def money_data():
             "cum_worldwide_gross": ["$245,899,899", "", "EUR34,500", "$500"],
         }
     )
+
+
+@pytest.fixture
+def release_data():
+    return pd.DataFrame(
+        {
+            "release": [
+                "TV Series (1970-1980)",
+                "Video game released July 10, 2018",
+                "10 December 2019",
+                "TV Mini-Series (2017)",
+            ]
+        }
+    )
