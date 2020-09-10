@@ -1,6 +1,9 @@
 import pytest
 
-from movies.dataprocessing.movie_type_dataprocessing import define_types, clean_release_column
+from movies.dataprocessing.movie_type_dataprocessing import (
+    define_types,
+    clean_release_column,
+)
 
 
 @pytest.mark.unit_test
