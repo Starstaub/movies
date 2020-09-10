@@ -1,5 +1,5 @@
-import pandas as pd
 from datetime import datetime
+import pandas as pd
 
 
 def format_time_to_minutes(df: pd.DataFrame, time_column: str) -> pd.DataFrame:
