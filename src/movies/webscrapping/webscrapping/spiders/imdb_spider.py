@@ -8,7 +8,7 @@ class ImdbSpider(scrapy.Spider):
     allowed_domains = ["imdb.com"]
     start_urls = pd.read_csv(
         "/Users/mary/git/movies/src/movies/webscrapping/movie_urls.csv"
-    )["movie_imdb_link"][:100].tolist()
+    )["movie_imdb_link"].tolist()
 
     custom_settings = {"FEED_FORMAT": "json", "FEED_URI": "movies.json"}
 
