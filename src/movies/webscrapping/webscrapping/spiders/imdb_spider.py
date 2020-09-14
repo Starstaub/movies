@@ -1,176 +1,138 @@
 import scrapy
+import pandas as pd
 
-from movies.webscrapping.webscrapping.items import MovieItem
 
-
-class imdbSpider(scrapy.Spider):
+class ImdbSpider(scrapy.Spider):
 
     name = "imdb"
-    allowed_domaines = ["imdb.com"]
-    start_urls = df["movie_imdb_link"].sample(1000).tolist()
+    allowed_domains = ["imdb.com"]
+    start_urls = pd.read_csv(
+        "/Users/mary/git/movies/src/movies/webscrapping/movie_urls.csv"
+    )["movie_imdb_link"][:100].tolist()
+
+    custom_settings = {"FEED_FORMAT": "json", "FEED_URI": "movies.json"}
 
     def parse(self, response):
 
         for wrapper in response.css("div#pagecontent.pagecontent"):
-
-            item = MovieItem()
-
-            item["original_title"] = (
-                wrapper.xpath(
+            yield {
+                "original_title": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//div[@class="originalTitle"]/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["duration"] = (
-                wrapper.xpath(
+                "duration": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//div[@class="subtext"]/time/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["release"] = (
-                wrapper.xpath(
+                "release": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//div[@class="subtext"]/a[@title="See more release dates"]/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["storyline"] = (
-                wrapper.xpath(
+                "storyline": wrapper.xpath(
                     """string(//*[@id="titleStoryLine"]//h2[contains(text(),"Storyline")]
                     /following-sibling::div[1]/p/span)"""
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["stars"] = (
-                wrapper.xpath(
+                "stars": wrapper.xpath(
                     """//*[@id="title-overview-widget"]//h4[contains(text(), "Stars:")]
                     //following-sibling::a[position() < 4]/text()"""
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["creator"] = (
-                wrapper.xpath(
+                "creator": wrapper.xpath(
                     """//*[@id="title-overview-widget"]//h4[contains(text(), "Creator")]
                     //following-sibling::a[position() < 3]//text()"""
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["genres"] = (
-                wrapper.xpath(
+                "genres": wrapper.xpath(
                     '//*[@id="titleStoryLine"]//h4[contains(text(),"Genres:")]//following-sibling::a/text()'
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["plot_keywords"] = (
-                wrapper.xpath(
+                "plot_keywords": wrapper.xpath(
                     """//*[@id="titleStoryLine"]//h4[contains(text(),"Plot Keywords:")]
                     //following-sibling::a//span/text()"""
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["certificate"] = (
-                wrapper.xpath(
+                "certificate": wrapper.xpath(
                     """
-                //*[@id="titleStoryLine"]//h4[contains(text(),"Certificate:")]/following-sibling::span/text()
-                |
-                //*[@id="title-overview-widget"]//div[@class="subtext"]/text()
-                """
+                    //*[@id="titleStoryLine"]//h4[contains(text(),"Certificate:")]/following-sibling::span/text()
+                    |
+                    //*[@id="title-overview-widget"]//div[@class="subtext"]/text()
+                    """
                 )
                 .get()
                 .strip()
-                or "Not rated"
-            )
+                or "Not rated",
 
-            item["movie_title"] = (
-                wrapper.xpath(
+                "movie_title": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//div[@class="title_wrapper"]/h1/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["title_year"] = (
-                wrapper.xpath(
+                "title_year": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//div[@class="title_wrapper"]//span[@id="titleYear"]/a/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["imdb_score"] = (
-                wrapper.xpath(
+                "imdb_score": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//span[@itemprop="ratingValue"]/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["number_ratings"] = (
-                wrapper.xpath(
+                "number_ratings": wrapper.xpath(
                     '//*[@id="title-overview-widget"]//span[@itemprop="ratingCount"]/text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["director"] = (
-                wrapper.xpath(
+                "director": wrapper.xpath(
                     """//*[@id="title-overview-widget"]//h4[contains(text(), "Director")]
                     //following-sibling::a[position() < 3]//text()"""
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["writer"] = (
-                wrapper.xpath(
+                "writer": wrapper.xpath(
                     """//*[@id="title-overview-widget"]//h4[contains(text(), "Writer")]
                     //following-sibling::a[position() < 3]//text()"""
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["episode_count"] = (
-                wrapper.xpath(
+                "episode_count": wrapper.xpath(
                     """//*[@id="title-overview-widget"]//a[@class="bp_item np_episode_guide np_right_arrow"]
                     //span[@class="bp_sub_heading"]/text()"""
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["country"] = (
-                wrapper.xpath(
+                "country": wrapper.xpath(
                     '//*[@id="titleDetails"]//h4[contains(text(), "Country:")]/following-sibling::a/text()'
                 ).getall()
-                or ""
-            )
+                or "",
 
-            item["budget"] = (
-                wrapper.xpath(
+                "budget": wrapper.xpath(
                     '//*[@id="titleDetails"]//h4[contains(text(), "Budget:")]/following-sibling::text()'
                 )
                 .get(default="")
-                .strip()
-            )
+                .strip(),
 
-            item["cum_worldwide_gross"] = (
-                wrapper.xpath(
+                "cum_worldwide_gross": wrapper.xpath(
                     """//*[@id="titleDetails"]//h4[contains(text(), "Cumulative Worldwide Gross:")]
                     /following-sibling::text()"""
                 )
                 .get(default="")
-                .strip()
-            )
-
-            yield
+                .strip(),
+            }
