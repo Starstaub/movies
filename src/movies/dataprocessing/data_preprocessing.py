@@ -19,7 +19,7 @@ def column_cleaning(df: pd.DataFrame) -> pd.DataFrame:
 
     df["episode_count"] = df["episode_count"].str.replace(" episodes", "")
     df["episode_count"] = [0 if x == "" else x for x in df["episode_count"].values]
-    df["episode_count"] = df["episode_count"].astyape(int)
+    df["episode_count"] = df["episode_count"].astype(int)
 
     return df
 

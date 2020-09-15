@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='comov',
+    name='movies',
     version='0.0.0',
     description='Training project that recommends movies',
-    url='https://github.com/Starstaub/comov',
+    url='https://github.com/Starstaub/movies',
     author='Starstaub',
     classifiers=[
         'Development Status :: 3 - Alpha',
