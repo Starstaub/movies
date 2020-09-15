@@ -124,5 +124,9 @@ dmypy.json
 .pyre/
 
 # IntelliJ - PyCharm
-
 .idea/
+
+# Docker stuff
+src/movies/db_config.py
+
+src/movies/movies.json
