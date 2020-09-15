@@ -130,3 +130,5 @@ dmypy.json
 src/movies/db_config.py
 
 src/movies/movies.json
+
+src/movies/dataloader/sql_2.py
