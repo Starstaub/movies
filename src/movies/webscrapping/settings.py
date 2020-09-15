@@ -1,6 +1,6 @@
-BOT_NAME = 'webscrapping'
+BOT_NAME = 'webscraping'
 
-SPIDER_MODULES = ['webscrapping.spiders']
-NEWSPIDER_MODULE = 'webscrapping.spiders'
+SPIDER_MODULES = ['webscraping.spiders']
+NEWSPIDER_MODULE = 'webscraping.spiders'
 
 OBOTSTXT_OBEY = True
