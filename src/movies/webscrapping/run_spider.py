@@ -1,5 +1,4 @@
 from scrapy.crawler import CrawlerProcess
-import os
 import time
 
 from scrapy.utils.project import get_project_settings
@@ -10,7 +9,6 @@ if __name__ == "__main__":
 
     start_time = time.time()
 
-    # os.system("rm movies.json")
     process = CrawlerProcess(get_project_settings())
     process.crawl(ImdbSpider)
     process.start()
