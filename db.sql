@@ -27,19 +27,19 @@ CREATE TABLE movie_data (
 CREATE TABLE description_df (
 
     idx int,
-    genres_1 varchar(20),
-    genres_2 varchar(20),
-    genres_3 varchar(20),
-    genres_4 varchar(20),
-    genres_5 varchar(20),
-    genres_6 varchar(20),
-    genres_7 varchar(20),
-    genres_8 varchar(20),
-    plot_keywords_1 varchar(50),
-    plot_keywords_2 varchar(50),
-    plot_keywords_3 varchar(50),
-    plot_keywords_4 varchar(50),
-    plot_keywords_5 varchar(50),
+    genres_1 varchar(50),
+    genres_2 varchar(50),
+    genres_3 varchar(50),
+    genres_4 varchar(50),
+    genres_5 varchar(50),
+    genres_6 varchar(50),
+    genres_7 varchar(50),
+    genres_8 varchar(50),
+    plot_keywords_1 varchar(100),
+    plot_keywords_2 varchar(100),
+    plot_keywords_3 varchar(100),
+    plot_keywords_4 varchar(100),
+    plot_keywords_5 varchar(100),
 
 );
 
