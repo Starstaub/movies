@@ -15,6 +15,7 @@ def column_cleaning(df: pd.DataFrame) -> pd.DataFrame:
     df["title_year"] = df["title_year"].astype(int)
 
     df["number_ratings"] = df["number_ratings"].str.replace(",", "")
+    df["number_ratings"] = [0 if x == '' else x for x in df["number_ratings"].values]
     df["number_ratings"] = df["number_ratings"].astype(int)
 
     df["episode_count"] = df["episode_count"].str.replace(" episodes", "")
