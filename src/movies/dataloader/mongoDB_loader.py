@@ -34,4 +34,3 @@ def read_mongo(
         del df["_id"]
 
     return df
-
