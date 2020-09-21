@@ -17,11 +17,11 @@ from movies.db_config import DB_SETTINGS
 def connect() -> pyodbc.Connection:
 
     server = "tcp:{}".format(DB_SETTINGS["SERVER"])
-    database = DB_SETTINGS["DATABASE"]
-    username = DB_SETTINGS["UID"]
-    password = DB_SETTINGS["PWD"]
+    database = str(DB_SETTINGS["DATABASE"])
+    username = str(DB_SETTINGS["UID"])
+    password = str(DB_SETTINGS["PWD"])
     port = str(DB_SETTINGS["PORT"])
-    driver = DB_SETTINGS["DRIVER"]
+    driver = str(DB_SETTINGS["DRIVER"])
     cnxn = pyodbc.connect(
         "DRIVER="
         + driver
@@ -39,7 +39,7 @@ def connect() -> pyodbc.Connection:
     return cnxn
 
 
-def run_once():
+def run_once() -> bool:
 
     try:
         df = read_mongo("movies", "movie_data")
@@ -132,6 +132,8 @@ def run_once():
         if_exists="append",
         chunksize=1000,
     )
+
+    return True
 
 
 if __name__ == "__main__":

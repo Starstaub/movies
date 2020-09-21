@@ -2,7 +2,13 @@ import pandas as pd
 from pymongo import MongoClient
 
 
-def _connect_mongo(host, port, username, password, database):
+def _connect_mongo(
+        host: str,
+        port: int,
+        username: str,
+        password: str,
+        database: str
+) -> MongoClient.db:  # type: ignore
 
     if username and password:
         mongo_uri = "mongodb://%s:%s@%s:%s/%s" % (
@@ -28,7 +34,7 @@ def read_mongo(
     username=None,
     password=None,
     no_id=True,
-):
+) -> pd.DataFrame:  # type: ignore
 
     if query is None:
         query = {}
