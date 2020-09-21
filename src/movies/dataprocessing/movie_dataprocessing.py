@@ -24,6 +24,8 @@ def clean_release_column(df: pd.DataFrame, column: str) -> pd.DataFrame:
         .str.replace("TV Series ", "")
         .str.replace("TV Movie ", "")
         .str.replace("Video game released ", "")
+        .str.replace("Episode aired ", "")
+        .str.replace("Video ", "")
     )
     df[column] = [
         x.replace("(", "").replace(")", "") if x.startswith("(") else x
