@@ -1,17 +1,17 @@
 import time
 
+import logging
+
 import pandas as pd
 import pyodbc
-
-from movies.dataloader.mongoDB_loader import read_mongo
-from movies.dataprocessing.data_preprocessing import clean_dataframe, split_list_into_df
+from pymongo.errors import OperationFailure
 
 from sqlalchemy import create_engine
 from sqlalchemy.pool import StaticPool
 
+from movies.dataloader.mongodb_loader import read_mongo
+from movies.dataprocessing.data_preprocessing import clean_dataframe, split_list_into_df
 from movies.db_config import DB_SETTINGS
-
-import logging
 
 
 def connect() -> pyodbc.Connection:
@@ -43,11 +43,10 @@ def run_once():
 
     try:
         df = read_mongo("movies", "movie_data")
-    except Exception as e:
+    except OperationFailure:
         logging.info(
-            "Something went wrong with the connection to MongoDB and the retrieving of data: {}".format(
-                e
-            )
+            """Something went wrong with the connection
+             to MongoDB and the retrieving of data"""
         )
 
     description_df = (
@@ -138,7 +137,7 @@ def run_once():
 if __name__ == "__main__":
 
     start_time = time.time()
-    logging.info("Process started at {}".format(start_time))
+    logging.info("Process started at %s", start_time)
 
     run_once()
 

@@ -1,7 +1,7 @@
-from movies.utils import TYPE_DATA
-
 import pandas as pd
 import numpy as np
+
+from movies.utils import TYPE_DATA
 
 
 def define_types(value: str) -> str:
