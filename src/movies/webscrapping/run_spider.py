@@ -1,5 +1,5 @@
-from scrapy.crawler import CrawlerProcess
 import time
+from scrapy.crawler import CrawlerProcess
 
 from scrapy.utils.project import get_project_settings
 from movies.webscrapping.spiders.imdb_spider import ImdbSpider
