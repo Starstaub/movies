@@ -129,6 +129,4 @@ dmypy.json
 # Docker stuff
 src/movies/db_config.py
 
-src/movies/dataloader/sql_2.py
-
 src/movies/.DS_Store

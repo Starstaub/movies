@@ -1,7 +1,7 @@
 from scrapy import Item, Field
 
 
-class MovieItem(Item):
+class MovieItem(Item):  # pylint: disable=too-many-ancestors
 
     original_title = Field()
     duration = Field()

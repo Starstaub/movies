@@ -15,16 +15,16 @@ class ImdbSpider(Spider):
         super().__init__(**kwargs)
 
         self.cnxn = MongoClient("localhost", 27017)
-        self.db = self.cnxn["movies"]
+        self.database = self.cnxn["movies"]
 
-        self.movie_data = self.db["movie_data"].remove()
+        self.movie_data = self.database["movie_data"].remove()
 
-        self.movie_urls = self.db["movie_urls"]
+        self.movie_urls = self.database["movie_urls"]
         self.start_urls = pd.DataFrame(list(self.movie_urls.find()))[
             "movie_imdb_link"
         ].tolist()
 
-    def parse(self, response):
+    def parse(self, response):  # pylint: disable=arguments-differ
 
         for wrapper in response.css("div#pagecontent.pagecontent"):
 
@@ -32,7 +32,8 @@ class ImdbSpider(Spider):
 
             movie["original_title"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//div[@class="originalTitle"]/text()'
+                    """//*[@id="title-overview-widget"]
+                    //div[@class="originalTitle"]/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -40,7 +41,8 @@ class ImdbSpider(Spider):
 
             movie["duration"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//div[@class="subtext"]/time/text()'
+                    """//*[@id="title-overview-widget"]
+                    //div[@class="subtext"]/time/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -48,7 +50,8 @@ class ImdbSpider(Spider):
 
             movie["release"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//div[@class="subtext"]/a[@title="See more release dates"]/text()'
+                    """//*[@id="title-overview-widget"]//div[@class="subtext"]
+                    /a[@title="See more release dates"]/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -56,8 +59,9 @@ class ImdbSpider(Spider):
 
             movie["storyline"] = (
                 wrapper.xpath(
-                    """string(//*[@id="titleStoryLine"]//h2[contains(text(),"Storyline")]
-                /following-sibling::div[1]/p/span)"""
+                    """string(//*[@id="titleStoryLine"]
+                    //h2[contains(text(),"Storyline")]
+                    /following-sibling::div[1]/p/span)"""
                 )
                 .get(default="")
                 .strip()
@@ -65,31 +69,36 @@ class ImdbSpider(Spider):
 
             movie["stars"] = (
                 wrapper.xpath(
-                    """//*[@id="title-overview-widget"]//h4[contains(text(), "Stars:")]
-                //following-sibling::a[position() < 4]/text()"""
+                    """//*[@id="title-overview-widget"]
+                    //h4[contains(text(), "Stars:")]
+                    //following-sibling::a[position() < 4]/text()"""
                 ).getall()
                 or ""
             )
 
             movie["creator"] = (
                 wrapper.xpath(
-                    """//*[@id="title-overview-widget"]//h4[contains(text(), "Creator")]
-                //following-sibling::a[position() < 3]//text()"""
+                    """//*[@id="title-overview-widget"]
+                    //h4[contains(text(), "Creator")]
+                    //following-sibling::a[position() < 3]//text()"""
                 ).getall()
                 or ""
             )
 
             movie["genres"] = (
                 wrapper.xpath(
-                    '//*[@id="titleStoryLine"]//h4[contains(text(),"Genres:")]//following-sibling::a/text()'
+                    """//*[@id="titleStoryLine"]
+                    //h4[contains(text(),"Genres:")]
+                    //following-sibling::a/text()"""
                 ).getall()
                 or ""
             )
 
             movie["plot_keywords"] = (
                 wrapper.xpath(
-                    """//*[@id="titleStoryLine"]//h4[contains(text(),"Plot Keywords:")]
-                //following-sibling::a//span/text()"""
+                    """//*[@id="titleStoryLine"]
+                    //h4[contains(text(),"Plot Keywords:")]
+                    //following-sibling::a//span/text()"""
                 ).getall()
                 or ""
             )
@@ -97,7 +106,8 @@ class ImdbSpider(Spider):
             movie["certificate"] = (
                 wrapper.xpath(
                     """
-                //*[@id="titleStoryLine"]//h4[contains(text(),"Certificate:")]/following-sibling::span/text()
+                //*[@id="titleStoryLine"]
+                //h4[contains(text(),"Certificate:")]/following-sibling::span/text()
                 |
                 //*[@id="title-overview-widget"]//div[@class="subtext"]/text()
                 """
@@ -109,7 +119,8 @@ class ImdbSpider(Spider):
 
             movie["movie_title"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//div[@class="title_wrapper"]/h1/text()'
+                    """//*[@id="title-overview-widget"]
+                    //div[@class="title_wrapper"]/h1/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -117,7 +128,9 @@ class ImdbSpider(Spider):
 
             movie["title_year"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//div[@class="title_wrapper"]//span[@id="titleYear"]/a/text()'
+                    """//*[@id="title-overview-widget"]
+                    //div[@class="title_wrapper"]
+                    //span[@id="titleYear"]/a/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -125,7 +138,8 @@ class ImdbSpider(Spider):
 
             movie["imdb_score"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//span[@itemprop="ratingValue"]/text()'
+                    """//*[@id="title-overview-widget"]
+                    //span[@itemprop="ratingValue"]/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -133,7 +147,8 @@ class ImdbSpider(Spider):
 
             movie["number_ratings"] = (
                 wrapper.xpath(
-                    '//*[@id="title-overview-widget"]//span[@itemprop="ratingCount"]/text()'
+                    """//*[@id="title-overview-widget"]
+                    //span[@itemprop="ratingCount"]/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -141,24 +156,27 @@ class ImdbSpider(Spider):
 
             movie["director"] = (
                 wrapper.xpath(
-                    """//*[@id="title-overview-widget"]//h4[contains(text(), "Director")]
-                //following-sibling::a[position() < 3]//text()"""
+                    """//*[@id="title-overview-widget"]
+                    //h4[contains(text(), "Director")]
+                    //following-sibling::a[position() < 3]//text()"""
                 ).getall()
                 or ""
             )
 
             movie["writer"] = (
                 wrapper.xpath(
-                    """//*[@id="title-overview-widget"]//h4[contains(text(), "Writer")]
-                //following-sibling::a[position() < 3]//text()"""
+                    """//*[@id="title-overview-widget"]
+                    //h4[contains(text(), "Writer")]
+                    //following-sibling::a[position() < 3]//text()"""
                 ).getall()
                 or ""
             )
 
             movie["episode_count"] = (
                 wrapper.xpath(
-                    """//*[@id="title-overview-widget"]//a[@class="bp_item np_episode_guide np_right_arrow"]
-                //span[@class="bp_sub_heading"]/text()"""
+                    """//*[@id="title-overview-widget"]
+                    //a[@class="bp_item np_episode_guide np_right_arrow"]
+                    //span[@class="bp_sub_heading"]/text()"""
                 )
                 .get(default="")
                 .strip()
@@ -166,14 +184,18 @@ class ImdbSpider(Spider):
 
             movie["country"] = (
                 wrapper.xpath(
-                    '//*[@id="titleDetails"]//h4[contains(text(), "Country:")]/following-sibling::a/text()'
+                    """//*[@id="titleDetails"]
+                    //h4[contains(text(), "Country:")]
+                    /following-sibling::a/text()"""
                 ).getall()
                 or ""
             )
 
             movie["budget"] = (
                 wrapper.xpath(
-                    '//*[@id="titleDetails"]//h4[contains(text(), "Budget:")]/following-sibling::text()'
+                    """//*[@id="titleDetails"]
+                    //h4[contains(text(), "Budget:")]
+                    /following-sibling::text()"""
                 )
                 .get(default="")
                 .strip()
@@ -181,8 +203,9 @@ class ImdbSpider(Spider):
 
             movie["cum_worldwide_gross"] = (
                 wrapper.xpath(
-                    """//*[@id="titleDetails"]//h4[contains(text(), "Cumulative Worldwide Gross:")]
-                /following-sibling::text()"""
+                    """//*[@id="titleDetails"]
+                    //h4[contains(text(), "Cumulative Worldwide Gross:")]
+                    /following-sibling::text()"""
                 )
                 .get(default="")
                 .strip()
