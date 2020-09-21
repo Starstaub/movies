@@ -62,5 +62,6 @@ def clean_dataframe(df: pd.DataFrame, description_df: pd.DataFrame) -> pd.DataFr
         ],
         inplace=True,
     )
+    df["idx"] = df.index
 
     return df
