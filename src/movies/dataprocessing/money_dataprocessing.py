@@ -6,7 +6,6 @@ from movies.utils import CURRENCY_VALUES
 def determine_currencies(df: pd.DataFrame, money_column: str) -> pd.DataFrame:
 
     df["currency"] = df[money_column].str.extract(r"([a-zA-Z\$]+)")
-
     df["currency_value"] = df["currency"].map(CURRENCY_VALUES).astype(float)
 
     return df

@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 from movies.utils import TYPE_DATA
 
@@ -33,20 +32,3 @@ def clean_release_column(df: pd.DataFrame, column: str) -> pd.DataFrame:
     ]
 
     return df
-
-
-def get_movie_kind(main_df: pd.DataFrame, genre_df: pd.DataFrame) -> pd.DataFrame:
-
-    cols = [x for x in genre_df.columns if "genres" in x]
-
-    conditions = [
-        (genre_df[cols] == "Short").any(axis="columns"),
-        (genre_df[cols] == "Documentary").any(axis="columns"),
-        (genre_df[cols] == "Animation").any(axis="columns"),
-    ]
-
-    choices = ["Short movie", "Documentary", "Animated movie"]
-
-    main_df["kind"] = np.select(conditions, choices, default="Other")
-
-    return main_df
