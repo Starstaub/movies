@@ -1,5 +1,6 @@
 import pytest
 import pandas as pd
+import numpy as np
 
 
 @pytest.fixture
@@ -22,5 +23,22 @@ def release_data():
                 "10 December 2019",
                 "TV Mini-Series (2017)",
             ]
+        }
+    )
+
+
+@pytest.fixture
+def ml_df():
+    return pd.DataFrame(
+        {
+            "genres": [
+                ["Animation", "Adventure"],
+                ["Western"],
+                [],
+                "",
+                np.NaN,
+                ["Comedy", "Family", "Animation"],
+            ],
+            "certificate": ["PG", "PG-R", "R", "", "Not rated", "Not rated"],
         }
     )
