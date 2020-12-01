@@ -29,7 +29,7 @@ def encode_column(df: pd.DataFrame, ml_df: pd.DataFrame) -> pd.DataFrame:
     return ml_df
 
 
-def model_df(df: pd.DataFrame):
+def model_df(df: pd.DataFrame) -> pd.DataFrame:
 
     ml_df = get_genres_dummies(df)
     ml_df = encode_column(df, ml_df)

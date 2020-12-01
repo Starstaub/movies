@@ -22,23 +22,12 @@ def connect() -> pyodbc.Connection:
     port = str(DB_SETTINGS["PORT"])
     driver = DB_SETTINGS["DRIVER"]
     cnxn = pyodbc.connect(
-        "DRIVER="
-        + driver
-        + ";SERVER="
-        + server
-        + ";PORT="
-        + port
-        + ";DATABASE="
-        + database
-        + ";UID="
-        + username
-        + ";PWD="
-        + password
+        f"DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}"
     )
     return cnxn
 
 
-def run_once():
+def run_once() -> bool:
 
     try:
         df = read_mongo("movies", "movie_data")
@@ -48,7 +37,7 @@ def run_once():
                 e
             )
         )
-        return
+        return False
 
     movie_df = clean_dataframe(df)
 
@@ -72,6 +61,8 @@ def run_once():
         if_exists="append",
         chunksize=1000,
     )
+
+    return True
 
 
 if __name__ == "__main__":
