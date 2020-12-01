@@ -9,9 +9,9 @@
 <main>
     {% for i in range(data.shape[0]) %}
         <div style="background-color:blanchedalmond; margin: 10px auto; padding: 10px; border-radius: 20px; width: 200px">
-            <img src="{{ data.loc[i, 'poster'] }}" alt="poster" style="border-radius: 10px"><br>
-            <span style="font-weight: bold">{{ data.loc[i, "movie_title"] }}</span>
-            <div style="color:cadetblue">
+            <img src="{{ data.loc[i, 'poster'] }}" alt="poster" style="border-radius: 10px; display: block; margin: auto">
+            <div style="font-weight: bold; text-align: center; font-family: Futura, sans-serif">{{ data.loc[i, "movie_title"] }}</div>
+            <div style="color:cadetblue; text-align: center">
             {% for j in data.loc[i, "stars"] %}
                 {{ j }},
             {% endfor %}
