@@ -22,18 +22,7 @@ def connect() -> pyodbc.Connection:
     port = str(DB_SETTINGS["PORT"])
     driver = DB_SETTINGS["DRIVER"]
     cnxn = pyodbc.connect(
-        "DRIVER="
-        + driver
-        + ";SERVER="
-        + server
-        + ";PORT="
-        + port
-        + ";DATABASE="
-        + database
-        + ";UID="
-        + username
-        + ";PWD="
-        + password
+        f"DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}"
     )
     return cnxn
 
