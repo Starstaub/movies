@@ -35,10 +35,9 @@ def ml_df():
                 ["Animation", "Adventure"],
                 ["Western"],
                 [],
-                "",
-                np.NaN,
+                [],
                 ["Comedy", "Family", "Animation"],
             ],
-            "certificate": ["PG", "PG-R", "R", "", "Not rated", "Not rated"],
+            "certificate": ["PG", "PG-R", "R", "Not rated", "Not rated"],
         }
     )
