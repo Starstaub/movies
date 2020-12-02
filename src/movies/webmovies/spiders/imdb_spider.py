@@ -223,9 +223,17 @@ class ImdbSpider(Spider):
                 '//*[@id="title-overview-widget"]//div[@class="poster"]/a/@href'
             ).get(default="")
 
-            yield response.follow(
-                picture_page, self.parse_page2, cb_kwargs=dict(movie=movie)
-            )
+            if picture_page != "http://imdb.com":
+
+                yield response.follow(
+                    picture_page, self.parse_page2, cb_kwargs=dict(movie=movie)
+                )
+
+            else:
+
+                movie["big_poster"] = ""
+
+                yield movie
 
     def parse_page2(self, response, movie):
 

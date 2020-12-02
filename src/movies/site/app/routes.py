@@ -1,19 +1,30 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, request, flash
+import pandas as pd
+import numpy as np
 from movies.dataloader.mongodb_loader import read_mongo
-from movies.dataprocessing.machinelearningmodels import get_predictions
+from movies.site.app.forms import MovieSearchForm
 
 app = Flask(__name__, template_folder='templates')
 
+app.config['SECRET_KEY'] = "niceapp"
 
-@app.route('/')
-@app.route('/index')
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-
     df = read_mongo("movies", "movie_data")
-    # df = df.dropna(subset=['imdb_score'])
-    array = get_predictions(df, 125)[0]
-    data = df.iloc[array].reset_index(drop=True)
-
-    return render_template("index.html", data=data)
+    df = df.replace(np.NaN, "")
+    form = MovieSearchForm(request.form)
+    results = pd.DataFrame()
+    if request.method == 'POST' and form.validate():
+        choice = form.choice.data
+        string_search = form.string_search.data
+        if choice == "movie_title":
+            results = df[df[choice].str.contains(string_search)]
+            if results.empty:
+                flash("No results.")
+        if choice == "director" or choice == "genres" or choice == "stars":
+            results = df[df[choice].map({string_search}.issubset)]
+            if results.empty:
+                flash("No results.")
+    return render_template("index.html", results=results, form=form)
 
