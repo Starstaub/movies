@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 from movies.dataprocessing.money_dataprocessing import convert_money_columns
 from movies.dataprocessing.movie_dataprocessing import (
@@ -7,28 +6,6 @@ from movies.dataprocessing.movie_dataprocessing import (
     clean_release_column,
 )
 from movies.dataprocessing.time_dataprocessing import format_time_to_minutes
-
-
-def column_cleaning(df: pd.DataFrame) -> pd.DataFrame:
-
-    df["title_year"] = ["a" if x == "" else x for x in df["title_year"].values]
-    df["title_year"] = pd.to_numeric(
-        df["title_year"], downcast="signed", errors="coerce"
-    )
-
-    df["number_ratings"] = df["number_ratings"].str.replace(",", "")
-    df["number_ratings"] = ["a" if x == "" else x for x in df["number_ratings"].values]
-    df["number_ratings"] = pd.to_numeric(df["number_ratings"], errors="coerce")
-
-    df["episode_count"] = df["episode_count"].str.replace(" episodes", "")
-    df["episode_count"] = ["a" if x == "" else x for x in df["episode_count"].values]
-    df["episode_count"] = pd.to_numeric(
-        df["episode_count"], downcast="signed", errors="coerce"
-    )
-
-    df["duration"] = df["duration"].replace(0, np.NaN)
-
-    return df
 
 
 def clean_lists(df: pd.DataFrame, column: str) -> pd.DataFrame:
@@ -49,6 +26,16 @@ def remove_doubles(df: pd.DataFrame, column: str) -> pd.DataFrame:
     return df
 
 
+def clean_list_columns(df: pd.DataFrame) -> pd.DataFrame:
+
+    col_list = ["stars", "genres", "plot_keywords", "director", "writer", "country", "creator"]
+    for col in col_list:
+        df[col] = df[col].apply(
+            lambda value: value if isinstance(value, list) else list()
+        )
+    return df
+
+
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
     df = format_time_to_minutes(df, "duration")
@@ -57,16 +44,15 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     df = convert_money_columns(df, "budget")
     df = convert_money_columns(df, "cum_worldwide_gross")
     df = remove_doubles(df, "writer")
-    df = column_cleaning(df)
     df = clean_lists(df, "genres")
+    df = clean_list_columns(df)
     df["certificate"] = (
         df["certificate"]
         .str.replace("Not rated", "Not Rated")
         .str.replace("Unrated", "Not Rated")
         .str.replace("Tous Public", "Tous publics")
     )
-    df.replace(r"^\s*$", np.NaN, regex=True, inplace=True)
-    df = df.dropna(subset=['imdb_score'])
+    df = df[df['imdb_score'] != ""].copy()
     df.drop(
         columns=["currency", "currency_value"], inplace=True,
     )

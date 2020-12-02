@@ -60,7 +60,8 @@ def read_mongo(
 
 def run_once(
     database,
-    collection,
+    collection_1,
+    collection_2,
     host="localhost",
     port=27017,
     username=None,
@@ -68,7 +69,7 @@ def run_once(
 ) -> bool:
 
     try:
-        df = read_mongo(database, collection)
+        df = read_mongo(database, collection_1)
     except OperationFailure:
         logging.info(
             """Something went wrong with the connection
@@ -80,10 +81,10 @@ def run_once(
         host=host, port=port, username=username, password=password, database=database
     )
 
-    cursor = database[collection]
+    cursor = database[collection_2]
     _ = cursor.delete_many({})
 
-    movie_data = clean_dataframe(df).to_dict("records")
+    movie_data = clean_dataframe(df.copy()).to_dict("records")
     cursor.insert_many(movie_data)
 
     return True
@@ -94,6 +95,6 @@ if __name__ == "__main__":
     start_time = time.time()
     logging.info("Process started at %s", start_time)
 
-    run_once("movies", "movie_data")
+    run_once("movies", "data", "movie_data")
 
     print("--- %s minute(s) ---" % ((time.time() - start_time) / 60))
