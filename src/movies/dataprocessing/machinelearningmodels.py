@@ -7,9 +7,6 @@ import numpy as np
 
 def get_genres_dummies(df: pd.DataFrame) -> pd.DataFrame:
 
-    df["genres"] = df["genres"].apply(
-        lambda value: value if isinstance(value, list) else []
-    )
     binarizer = MultiLabelBinarizer()
 
     return pd.DataFrame(
@@ -21,7 +18,6 @@ def get_genres_dummies(df: pd.DataFrame) -> pd.DataFrame:
 
 def encode_column(df: pd.DataFrame, ml_df: pd.DataFrame) -> pd.DataFrame:
 
-    # This trusts that there are no NaN values in the dataset.
     label_encoder = LabelEncoder()
     label_encoder.fit(df["certificate"].unique())
     ml_df["certificate"] = label_encoder.transform(df["certificate"])
