@@ -7,15 +7,16 @@ from movies.site.app.forms import MovieSearchForm
 app = Flask(__name__, template_folder='templates')
 
 app.config['SECRET_KEY'] = "niceapp"
+WTF_CSRF_SECRET_KEY = "niceapp"
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     df = read_mongo("movies", "movie_data")
     df = df.replace(np.NaN, "")
-    form = MovieSearchForm(request.form)
+    form = MovieSearchForm()
     results = pd.DataFrame()
-    if request.method == 'POST' and form.validate():
+    if form.validate_on_submit():
         choice = form.choice.data
         string_search = form.string_search.data
         if choice == "movie_title":

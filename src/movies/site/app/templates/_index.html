@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <title>Example</title>
 </head>
-<body>
-
+<body style="width: 80%; margin:auto">
+<header style="background-color: lightyellow">This is my header</header>
 <main>
-    <div style="display: block; text-align: center">
-    <form method="POST" action="/">
-        {{ form.csrf_token}}
-        {{ form.choice.label }}{{ form.choice }}
-        {{ form.string_search.label }}{{ form.string_search }}
-    <input type="submit" value="Submit">
+    <aside style="width:200px;float:left;background-color:lightblue">
+        {% from "_formhelpers.html" import render_field %}
+    <form method=post >
+      <dl>
+        {{ render_field(form.choice) }}
+        {{ render_field(form.string_search) }}
+      </dl>
+      <p><input type=submit value=Submit>
     </form>
-    </div>
+    </aside>
+    <article style="overflow: hidden">
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -42,7 +45,9 @@
         <div style="border-bottom: #333 solid 0.5px; width: 600px; margin: auto"></div>
         {% endfor %}
     {% endif %}
+    </article>
 </main>
 
+<footer style="background-color: lightyellow">And this is my footer.</footer>
 </body>
 </html>
