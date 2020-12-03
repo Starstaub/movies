@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>Example</title>
 </head>
-<body style="width: 80%; margin:auto">
+<body>
 
 <main>
+    <div style="display: block; text-align: center">
     <form method="POST" action="/">
         {{ form.csrf_token}}
         {{ form.choice.label }}{{ form.choice }}
         {{ form.string_search.label }}{{ form.string_search }}
     <input type="submit" value="Submit">
     </form>
+    </div>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
