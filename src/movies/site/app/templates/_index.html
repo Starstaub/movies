@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+</head>
+<body style="width: 80%; margin:auto">
+<header style="background-color: lightyellow">This is my header</header>
+<main>
+    <aside style="width:200px;float:left;background-color:lightblue">
+        {% from "_formhelpers.html" import render_field %}
+    <form method=post >
+      <dl>
+        {{ render_field(form.choice) }}
+        {{ render_field(form.string_search) }}
+      </dl>
+      <p><input type=submit value=Submit>
+    </form>
+    </aside>
+    <article style="overflow: hidden">
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if not results.empty %}
+        <h1 style="text-align: center; font-family: Futura, sans-serif">Results</h1>
+        {% for i in results.index %}
+            <div style="margin: 10px auto; padding: 10px; border-radius: 20px; width:600px; height: 120px">
+                <img src="{{ results.loc[i, 'poster'] }}" alt="poster" style="border-radius: 10px; display: block; float: left; width: 80px">
+                <div style="padding-left: 10px; margin-left: 10px; float: left">
+                    <div style="font-family: Futura, sans-serif; font-weight: bold">{{ results.loc[i, ["movie_title"]][0] }}
+                        <span style="font-family: Arial, sans-serif; font-size: 10pt; font-weight: normal">({{ results.loc[i, ["title_year"]][0] }})</span></div>
+                    <div style="font-family: Arial, sans-serif; font-style: italic">Director-s: {{ results.loc[i, ["director"]][0] }}</div>
+
+                </div>
+
+            </div>
+        <div style="border-bottom: #333 solid 0.5px; width: 600px; margin: auto"></div>
+        {% endfor %}
+    {% endif %}
+    </article>
+</main>
+
+<footer style="background-color: lightyellow">And this is my footer.</footer>
+</body>
+</html>
