@@ -70,6 +70,7 @@ def run_once(
 
     try:
         df = read_mongo(database, collection_1)
+        df = df.reset_index()
     except OperationFailure:
         logging.info(
             """Something went wrong with the connection
