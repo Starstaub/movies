@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <a href=" {{ url_for('index') }} ">< Back</a>
+    <div><img src="{{ results['poster'] }}" alt="poster"></div>
+    <h1>{{ results["movie_title"] }} ({{ results["title_year"] }})</h1>
+</main>
+
+{% endblock %}
