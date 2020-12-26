@@ -14,20 +14,23 @@
 
     {% if not results.empty %}
         <h1 style="text-align: center; font-family: Futura, sans-serif">Results</h1>
-        {% for i in results.index %}
-            <div style="margin: 10px auto; padding: 10px; border-radius: 20px; width:600px; height: 120px">
-                <img src="{{ results.loc[i, 'poster'] }}" alt="poster" style="border-radius: 10px; display: block; float: left; width: 80px">
-                <div style="padding-left: 10px; margin-left: 10px; float: left">
-                    <div style="font-family: Futura, sans-serif; font-weight: bold">{{ results.loc[i, ["movie_title"]][0] }}
-                        <span style="font-family: Arial, sans-serif; font-size: 10pt; font-weight: normal">({{ results.loc[i, ["title_year"]][0] }})</span></div>
-                    <div style="font-family: Arial, sans-serif; font-style: italic">Director-s: {{ results.loc[i, ["director"]][0] }}</div>
-                <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0]) }}">More movies like ></a>
-                <a href="{{ url_for('details', id=results.loc[i, ['index']][0]) }}">Details ></a>
-                </div>
-
-            </div>
-        <div style="border-bottom: #333 solid 0.5px; width: 600px; margin: auto"></div>
-        {% endfor %}
+        <div class="results">
+            <ul>
+                {% for i in results.index %}
+                    <li>
+                        <img src="{{ results.loc[i, 'poster'] }}" alt="poster" class="results_poster">
+                        <div class="results_title">{{ results.loc[i, ["movie_title"]][0] }}</div>
+                        <div class="results_year">({{ results.loc[i, ["title_year"]][0] }})</div>
+                        <!-- <div class="director">Director-s:
+                            {% for element in results.loc[i, ["director"]][0] %}
+                            {{ element + ", " }}
+                        {% endfor %}</div> -->
+                        <div class="results_links"><a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0]) }}" class="results_link">More like</a>
+                        <a href="{{ url_for('details', id=results.loc[i, ['index']][0]) }}" class="results_link">Details</a></div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     {% else %}
     <p> Please enter something!</p>
     {% endif %}
