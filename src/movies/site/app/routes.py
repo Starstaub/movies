@@ -1,3 +1,5 @@
+import ast
+
 from flask import Flask, render_template, flash
 import pandas as pd
 import numpy as np
@@ -22,11 +24,19 @@ def index():
         choice = data.choice.data
         string_search = data.string_search.data
         if choice == "movie_title":
-            results = df[df[choice].str.contains(string_search)]
+            results = df[
+                df[choice].str.lower().str.contains(string_search.lower())
+            ].sort_values(by="title_year")
             if results.empty:
                 flash("No results.")
         if choice == "director" or choice == "genres" or choice == "stars":
-            results = df[df[choice].map({string_search}.issubset)]
+            results = df[
+                df[choice]
+                .astype(str)
+                .str.lower()
+                .transform(ast.literal_eval)
+                .map({string_search.lower()}.issubset)
+            ].sort_values(by="title_year")
             if results.empty:
                 flash("No results.")
 
