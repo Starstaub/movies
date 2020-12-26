@@ -24,7 +24,9 @@ def index():
         choice = data.choice.data
         string_search = data.string_search.data
         if choice == "movie_title":
-            results = df[df[choice].str.lower().str.contains(string_search.lower())]
+            results = df[
+                df[choice].str.lower().str.contains(string_search.lower())
+            ].sort_values(by="title_year")
             if results.empty:
                 flash("No results.")
         if choice == "director" or choice == "genres" or choice == "stars":
@@ -34,7 +36,7 @@ def index():
                 .str.lower()
                 .transform(ast.literal_eval)
                 .map({string_search.lower()}.issubset)
-            ]
+            ].sort_values(by="title_year")
             if results.empty:
                 flash("No results.")
 
