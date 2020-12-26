@@ -7,7 +7,7 @@ body {
     border-radius: 10px;
     height: 500px;
     width: 700px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 10px;
 }
 
@@ -15,4 +15,74 @@ main {
     overflow-y: auto;
     width: 700px;
 	height: 450px;
+}
+
+.director {
+    font-family: Arial, sans-serif;
+    font-style: italic;
+}
+
+.results > ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  height: 300px
+}
+
+.results > ul > li {
+  list-style: none;
+  width: 27.5%;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.results_poster {
+    border-radius: 10px;
+    display: block;
+    width: 100px;
+    margin: 10px auto 15px auto;
+}
+
+.results_title, .results_year {
+    text-align: center;
+    font-family: Futura, sans-serif;
+    font-size: 14px;
+}
+
+.results_title {
+    font-weight: bold;
+}
+
+.results_year {
+    font-weight: normal;
+}
+
+.results_links {
+   margin: 13px;
+}
+
+a.results_link {
+    padding: 8px;
+    margin: 5px;
+    border-width: 1px 3px 3px 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 8px;
+    font-size: 10px;
+    text-align: center;
+    font-family: Futura, sans serif;
+    text-decoration: none;
+    color: black;
+    width: 30%;
+    display: block;
+    float: left;
+}
+
+a.results_link:hover {
+    border-width: 2px;
 }
