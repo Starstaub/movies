@@ -47,7 +47,7 @@ def knn_model(ml_df: pd.DataFrame, idx: int) -> np.array:
     x = ml_df.loc[:, ml_df.columns != "labels"]
     y = ml_df["labels"]
 
-    knn = KNeighborsClassifier(n_neighbors=7, metric="euclidean")
+    knn = KNeighborsClassifier(n_neighbors=13, metric="euclidean")
     knn.fit(x, y)
 
     model_data = x.iloc[idx].tolist()

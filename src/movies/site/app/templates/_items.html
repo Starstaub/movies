@@ -1,0 +1,20 @@
+<li>
+    <img src="{{ results.loc[i, 'poster'] }}" alt="poster" class="results_poster">
+
+    <div class="movie_details">
+        <div class="results_title">{{ results.loc[i, ["movie_title"]][0] }}</div>
+
+        <div class="results_year">
+            {% if not results.loc[i, ["title_year"]][0] == "" %}
+            ({{ results.loc[i, ["title_year"]][0] }}, {{ results.loc[i, ["imdb_score"]][0] }}/10)
+            {% else %}
+            ({{ results.loc[i, ["imdb_score"]][0] }})
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="results_links">
+        <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0]) }}" class="results_link_1">More like</a>
+        <a href="{{ url_for('details', id=results.loc[i, ['index']][0]) }}" class="results_link_2">Details</a>
+    </div>
+</li>
