@@ -11,23 +11,15 @@
 </head>
 <body>
 
-<div><strong>MovieDB</strong>
-<a href="{{ url_for('index') }}">Home</a>
-</div>
-<hr>
-
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class="flashes">
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+<header>
+    <strong>MovieDB</strong>
+    <a href="{{ url_for('index') }}">Home</a>
+</header>
 
 {% block content %}
 {% endblock %}
 
+<footer></footer>
 </body>
+
 </html>
