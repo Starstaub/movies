@@ -30,7 +30,11 @@ def index():
             ].sort_values(by=chosen_column)
             if results.empty:
                 flash("No results.")
-        if chosen_type == "director" or chosen_type == "genres" or chosen_type == "stars":
+        if (
+            chosen_type == "director"
+            or chosen_type == "genres"
+            or chosen_type == "stars"
+        ):
             results = df[
                 df[chosen_type]
                 .astype(str)
