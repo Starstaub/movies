@@ -18,29 +18,30 @@ WTF_CSRF_SECRET_KEY = "niceapp"
 def index():
     df = read_mongo("movies", "movie_data")
     df = df.replace(np.NaN, "")
-    data = MovieSearchForm()
+    form = MovieSearchForm()
     results = pd.DataFrame()
-    if data.validate_on_submit():
-        choice = data.choice.data
-        string_search = data.string_search.data
-        if choice == "movie_title":
+    if form.validate_on_submit():
+        chosen_type = form.chosen_type.data
+        string_search = form.string_search.data
+        chosen_column = form.chosen_column_order.data
+        if chosen_type == "movie_title":
             results = df[
-                df[choice].str.lower().str.contains(string_search.lower())
-            ].sort_values(by="title_year")
+                df[chosen_type].str.lower().str.contains(string_search.lower())
+            ].sort_values(by=chosen_column)
             if results.empty:
                 flash("No results.")
-        if choice == "director" or choice == "genres" or choice == "stars":
+        if chosen_type == "director" or chosen_type == "genres" or chosen_type == "stars":
             results = df[
-                df[choice]
+                df[chosen_type]
                 .astype(str)
                 .str.lower()
                 .transform(ast.literal_eval)
                 .map({string_search.lower()}.issubset)
-            ].sort_values(by="title_year")
+            ].sort_values(by=chosen_column)
             if results.empty:
                 flash("No results.")
 
-    return render_template("index.html", results=results, data=data)
+    return render_template("index.html", results=results, form=form)
 
 
 @app.route("/details/<id>")
