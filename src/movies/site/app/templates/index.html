@@ -3,37 +3,29 @@
 {% block content %}
 
 <main>
-    <div style="display: block; text-align: center">
+    <div id="search_bar">
     <form method="POST" action="/">
-        {{ data.csrf_token}}
-        {{ data.choice.label }}{{ data.choice }}
-        {{ data.string_search.label }}{{ data.string_search }}
+        {{ form.csrf_token}}
+        {{ form.chosen_type.label }}{{ form.chosen_type }}
+        {{ form.string_search }}
+        {{ form.chosen_column_order.label }}{{ form.chosen_column_order }}
     <input type="submit" value="Submit">
     </form>
     </div>
 
-    {% if not results.empty %}
-        <h1 style="text-align: center; font-family: Futura, sans-serif">Results</h1>
-        <div class="results">
-            <ul>
-                {% for i in results.index %}
-                    <li>
-                        <img src="{{ results.loc[i, 'poster'] }}" alt="poster" class="results_poster">
-                        <div class="results_title">{{ results.loc[i, ["movie_title"]][0] }}</div>
-                        <div class="results_year">({{ results.loc[i, ["title_year"]][0] }})</div>
-                        <!-- <div class="director">Director-s:
-                            {% for element in results.loc[i, ["director"]][0] %}
-                            {{ element + ", " }}
-                        {% endfor %}</div> -->
-                        <div class="results_links"><a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0]) }}" class="results_link">More like</a>
-                        <a href="{{ url_for('details', id=results.loc[i, ['index']][0]) }}" class="results_link">Details</a></div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-    <p> Please enter something!</p>
-    {% endif %}
+    <section>
+        {% include '_messages.html' %}
+        {% if not results.empty %}
+            <h1 style="text-align: center; font-family: Futura, sans-serif">Results</h1>
+            <div class="results">
+                <ul>
+                    {% for i in results.index %}
+                        {% include '_items.html' %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </section>
 </main>
 
 {% endblock %}
