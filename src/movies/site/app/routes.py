@@ -45,7 +45,7 @@ def index():
             if results.empty:
                 flash("No results.")
 
-    return render_template("index.html", results=results, form=form)
+    return render_template("index.html", results=results, form=form, title="Home - MovieDB")
 
 
 @app.route("/details/<id>")
@@ -53,7 +53,7 @@ def details(id):
     df = read_mongo("movies", "movie_data")
     results = df.iloc[int(id)]
 
-    return render_template("details.html", results=results)
+    return render_template("details.html", results=results, title="Details - MovieDB")
 
 
 @app.route("/recommendations/<id>")
@@ -65,5 +65,5 @@ def recommendations(id):
     initial_movie = df.iloc[int(id)]
 
     return render_template(
-        "recommendations.html", initial_movie=initial_movie, results=results
+        "recommendations.html", initial_movie=initial_movie, results=results, title="Recommendations - MovieDB"
     )
