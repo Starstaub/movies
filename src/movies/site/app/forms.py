@@ -6,10 +6,10 @@ from flask_wtf import FlaskForm
 class MovieSearchForm(FlaskForm):
 
     fields = [
-        ("director", "Director"),
         ("movie_title", "Title"),
-        ("genres", "Genre"),
+        ("director", "Director"),
         ("stars", "Actor"),
+        ("genres", "Genre"),
     ]
     order = [
         ("index", "Default"),
@@ -18,8 +18,8 @@ class MovieSearchForm(FlaskForm):
         ("imdb_score", "IMDB Score"),
     ]
 
-    chosen_type = SelectField("Search:", choices=fields, validators=[DataRequired()])
+    chosen_type = SelectField("Search: ", choices=fields, validators=[DataRequired()])
     string_search = StringField("", validators=[DataRequired()])
     chosen_column_order = SelectField(
-        "ordered by", choices=order, validators=[DataRequired()]
+        " ordered by ", choices=order, validators=[DataRequired()]
     )
