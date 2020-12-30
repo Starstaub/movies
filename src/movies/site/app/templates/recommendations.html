@@ -7,10 +7,22 @@
 
     <div class="recommended_title">
         <img src="{{ initial_movie['poster'] }}" alt="poster" class="initial_poster">
-        <div class="results_title">{{ initial_movie["movie_title"] }}</div>
-        <div class="results_title">{% if not initial_movie["title_year"] == "" %}
-            ({{ initial_movie["title_year"] }})
+        <div class="text">
+            <div class="results_title">{{ initial_movie["movie_title"] }}</div>
+            <div class="results_year">
+                {% if not initial_movie["title_year"] == "" %}
+                ({{ initial_movie["title_year"] }}, {{ initial_movie["imdb_score"] }}/10)
+                {% else %}
+                ({{ initial_movie["imdb_score"] }})
+                {% endif %}
+            </div>
+            {% if not initial_movie["director"] == [] %}
+                <p><strong>Directed by:</strong> {{ ", ".join(initial_movie["director"]) }}</p>
+            {% elif not initial_movie["creator"] == [] %}
+                <p><strong>Created by:</strong> {{ ", ".join(initial_movie["creator"]) }}</p>
             {% endif %}
+            <p><strong>Storyline:</strong>
+            <div class="movie_storyline_container">{{ initial_movie["storyline"] }}</div></p>
         </div>
 
     </div>

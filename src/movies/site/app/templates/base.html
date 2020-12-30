@@ -12,8 +12,10 @@
 <body>
 
 <header>
-    <strong>MovieDB</strong>
-    <a href="{{ url_for('index') }}">Home</a>
+    <ul>
+        <li><strong>&#127902; MovieDB</strong></li>
+        <li><a href="{{ url_for('index') }}" class="header_link">Home</a></li>
+    </ul>
 </header>
 
 {% block content %}
