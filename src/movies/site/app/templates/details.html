@@ -3,9 +3,35 @@
 {% block content %}
 
 <main>
-    <a href=" {{ url_for('index') }} ">< Back</a>
-    <div><img src="{{ results['poster'] }}" alt="poster"></div>
-    <h1>{{ results["movie_title"] }} ({{ results["title_year"] }})</h1>
+    <div class="details_container">
+        <div class="details_container_header">{{ results["movie_title"] }}</div>
+
+            <div class="details_left">
+                <a href="{{ results['big_poster'] }}" target="_blank">
+                    <img src="{{ results['poster'] }}" alt="poster" class="details_poster">
+                </a>
+                <div class="details_imdb_score">
+                    <span>{{ results["imdb_score"] }}</span>/10
+                </div>
+            </div>
+
+            <div>
+                {% if not results["title_year"] == "" %}
+                    {{ results["movie_title"] }} ({{ results["title_year"] }})
+                {% else %}
+                    {{ results["movie_title"] }}
+                {% endif %}
+                <br>
+                {% if not results["original_title"] == "" %}
+                    (Original title: {{ results["original_title"] }})
+                {% endif %}
+                <br>
+                {% if not results["release"] == "" %}
+                    Released: {{ results["release"] }}
+                {% endif %}
+            </div>
+
+    </div>
 </main>
 
 {% endblock %}
