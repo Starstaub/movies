@@ -27,6 +27,17 @@ header {
 	border-top-left-radius: 10px;
 }
 
+header > ul {
+    list-style: none;
+    padding: 0;
+    display: inline;
+}
+
+header > ul > li {
+    display: inline;
+    margin-left: 8px;
+}
+
 a.header_link {
     text-decoration: none;
     color: black;
@@ -52,11 +63,6 @@ a.header_link:hover {
   border-bottom-right-radius: 10px;
 }
 
-.movie_storyline_container::-webkit-scrollbar-track {
-  border-top-right-radius: 10px;
-  border-right: 1px solid black;
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: white;
@@ -74,15 +80,16 @@ main {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2' height='2' viewBox='0 0 8 8'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath fill-rule='evenodd' d='M0 0h4v4H0V0zm4 4h4v4H4V4z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-header > ul {
-    list-style: none;
-    padding: 0;
-    display: inline;
-}
-
-header > ul > li {
-    display: inline;
-    margin-left: 8px;
+h1 {
+    text-align: center;
+    font-family: Futura, sans-serif;
+    font-size: 22px;
+    background-color: white;
+    width: 88%;
+    margin: 20px auto;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 #search_bar {
@@ -117,92 +124,7 @@ height: 26px;
 position: relative; top: -1px;
 }
 
-.results > ul {
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  margin-bottom: 25px;
-}
-
-.results > ul > li {
-  list-style: none;
-  height: 300px;
-  width: 30.5%;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  padding: 10px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 10px;
-  background-color: white;
-}
-
-.results_poster, .initial_poster {
-    border-radius: 10px;
-    display: block;
-    margin: auto;
-    height: 147px;
-}
-
-.initial_poster {
-    float: left;
-    margin-right: 8px;
-}
-
-.recommended_title {
-    width: 75%;
-    height: 170px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-}
-
-.recommended_title > p {
-    margin: 8px 8px;
-}
-
-.text {
-    font-family: Futura, sans serif;
-    font-size: 12px;
-}
-
-.text > p {
-    display: block;
-    line-height: 3px;
-}
-
-.movie_storyline_container {
-    overflow-y: auto;
-    height: 70px;
-    font-size: 12px;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.results_title, .results_year {
-    text-align: center;
-    font-family: Futura, sans-serif;
-    font-size: 13px;
-}
-
-.results_title {
-    font-weight: bold;
-}
-
-.results_year {
-    font-weight: normal;
-}
-
-.results_links {
-    height:33px;
-    text-align: center;
-}
-
-a.results_link_1, a.results_link_2, .submit_button {
+.submit_button {
     padding: 8px;
     border-width: 1px;
     border-style: solid;
@@ -215,68 +137,10 @@ a.results_link_1, a.results_link_2, .submit_button {
     color: black;
     background-color: white;
     cursor: pointer !important;
-}
-
-a.results_link_2, .submit_button {
     margin-left: 8px;
 }
 
-a.results_link_1:hover, a.results_link_2:hover, .submit_button:hover {
+.submit_button:hover {
     color: white;
     background-color: black;
-}
-
-.movie_details {
-    height:100px;
-    padding: 10px;
-}
-
-h1 {
-    text-align: center;
-    font-family: Futura, sans-serif;
-    font-size: 22px;
-}
-
-.details_container {
-width: 650px;
-height: 425px;
-margin: 20px auto;
-background-color: white;
-border: 1px solid black;
-border-radius: 10px;
-}
-
-.details_container_header {
-height: 30px;
-border-bottom: 1px solid black;
-font-family: Futura, sans serif;
-font-size: 14px;
-line-height: 30px;
-text-align: center;
-color: white;
-background-color: black;
-border-top-left-radius: 9px;
-border-top-right-radius: 9px;
-}
-
-.details_poster {
-    margin: 30px 20px;
-    display: block;
-    width: 180px;
-    border-radius: 10px;
-}
-
-.details_left {
-    float: left;
-    width: 220px;
-}
-
-.details_imdb_score {
-    font-family: Futura, sans serif;
-    font-size: 20px;
-    text-align: center;
-}
-
-.details_imdb_score > span {
-    font-weight: bold;
 }

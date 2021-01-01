@@ -140,5 +140,5 @@ def recommendations(id):
         title="Recommendations - MovieDB",
         chosen_type=chosen_type,
         string_search=string_search,
-        chosen_column=chosen_column
+        chosen_column=chosen_column,
     )
