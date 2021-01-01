@@ -3,7 +3,7 @@
 {% block content %}
 
 <main>
-    <div id="search_bar" style="margin-top: 150px">
+    <div id="search_bar">
     <form method="POST" action="/">
         {{ form.csrf_token}}
         {{ form.chosen_type.label }}{{ form.chosen_type(class="dropdown_list") }}
@@ -12,10 +12,20 @@
     <input type="submit" value="Submit" class="submit_button">
     </form>
     </div>
-
     <section>
         {% include '_messages.html' %}
+        {% if not results.empty %}
+            <h1>Results</h1>
+            <div class="results">
+                <ul>
+                    {% for i in results.index %}
+                        {% include '_items.html' %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </section>
 </main>
 
 {% endblock %}
+
