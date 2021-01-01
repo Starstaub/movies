@@ -3,6 +3,8 @@
 {% block content %}
 
 <main>
+
+    <a href=" {{ url_for('search', chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}">< Back</a>
     <h1>Recommendations for</h1>
 
     <div class="recommended_title">
