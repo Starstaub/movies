@@ -22,3 +22,17 @@ CURRENCY_VALUES = {
     "CAD": 0.76,
     "$": 1,
 }
+
+FIELDS = [
+    ("movie_title", "Title"),
+    ("director", "Director"),
+    ("stars", "Actor"),
+    ("genres", "Genre"),
+]
+
+ORDER = [
+    ("index", "Default"),
+    ("title_year", "Year"),
+    ("movie_title", "Title"),
+    ("imdb_score", "IMDB Score"),
+]
