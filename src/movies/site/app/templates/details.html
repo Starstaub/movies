@@ -3,8 +3,6 @@
 {% block content %}
 
 <main>
-
-    <a href=" {{ url_for('search', chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}">< Back</a>
     <div class="details_container">
         <div class="details_container_header">{{ results["movie_title"] }}</div>
 
@@ -13,8 +11,9 @@
                     <img src="{{ results['poster'] }}" alt="poster" class="details_poster">
                 </a>
                 <div class="details_imdb_score">
-                    <span>{{ results["imdb_score"] }}</span>/10
+                    <strong>{{ results["imdb_score"] }}</strong>/10
                 </div>
+                <a href=" {{ url_for('search', chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="details_back_link"><strong><</strong> Back to results</a>
             </div>
 
             <div>
