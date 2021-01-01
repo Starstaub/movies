@@ -14,7 +14,7 @@
     </div>
 
     <div class="results_links">
-        <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_1">More like</a>
         <a href="{{ url_for('details', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_2">Details</a>
+        <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_1">More like</a>
     </div>
 </li>

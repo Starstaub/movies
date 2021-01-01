@@ -217,7 +217,7 @@ a.results_link_1, a.results_link_2, .submit_button {
     cursor: pointer !important;
 }
 
-a.results_link_2, .submit_button {
+a.results_link_1, .submit_button {
     margin-left: 8px;
 }
 
