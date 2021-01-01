@@ -1,7 +1,7 @@
 <li>
     <img src="{{ results.loc[i, 'poster'] }}" alt="poster" class="results_poster">
 
-    <div class="movie_details">
+    <div class="results_details">
         <div class="results_title">{{ results.loc[i, ["movie_title"]][0] }}</div>
 
         <div class="results_year">
@@ -13,8 +13,8 @@
         </div>
     </div>
 
-    <div class="results_links">
-        <a href="{{ url_for('details', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_2">Details</a>
-        <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_1">More like</a>
+    <div class="results_link_container">
+        <a href="{{ url_for('details', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_details">Details</a>
+        <a href="{{ url_for('recommendations', id=results.loc[i, ['index']][0], chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column) }}" class="results_link_reco">More like</a>
     </div>
 </li>
