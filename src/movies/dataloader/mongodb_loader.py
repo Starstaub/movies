@@ -55,7 +55,7 @@ def read_mongo(
     if no_id:
         del df["_id"]
 
-    return df
+    return df.reset_index()
 
 
 def run_once(
@@ -70,7 +70,6 @@ def run_once(
 
     try:
         df = read_mongo(database, collection_1)
-        df = df.reset_index()
     except OperationFailure:
         logging.info(
             """Something went wrong with the connection
