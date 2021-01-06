@@ -1,4 +1,4 @@
-import ast
+from ast import literal_eval
 
 from flask import render_template, flash, url_for, request
 import pandas as pd
@@ -20,13 +20,24 @@ def get_movie(chosen_type, string_search, chosen_column):
     ).order_by(chosen_column)
 
 
-def get_key(val, tuple_to_search):
+def clean_list_results(results):
 
-    dictionary = dict(tuple_to_search)
+    list_results = pd.DataFrame(
+        {
+            "stars": [results.stars],
+            "director": [results.director],
+            "plot_keywords": [results.plot_keywords],
+            "writer": [results.writer],
+            "creator": [results.creator],
+            "genres": [results.genres],
+            "country": [results.country],
+        }
+    )
 
-    for key, value in dictionary.items():
-        if val == value:
-            return key
+    for col in list_results.columns:
+        list_results[col] = list_results[col].apply(literal_eval)
+
+    return list_results
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -89,16 +100,18 @@ def search():
 @app.route("/details/<string:id>")
 def details(id):
 
-    df = read_mongo("movies", "movie_data")
-    results = df.iloc[int(id)]
+    results = Movies.query.filter(Movies.index == int(id)).first()
 
     chosen_type = request.args.get("chosen_type")
     string_search = request.args.get("string_search")
     chosen_column = request.args.get("chosen_column")
 
+    list_results = clean_list_results(results)
+
     return render_template(
         "details.html",
         results=results,
+        list_results=list_results,
         title="Details - MovieDB",
         chosen_type=chosen_type,
         string_search=string_search,
