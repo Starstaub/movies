@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 
-from movies.dataprocessing.time_dataprocessing import format_time_to_minutes
+from dataprocessing.time_dataprocessing import format_time_to_minutes
 
 
 @pytest.mark.unit_test
