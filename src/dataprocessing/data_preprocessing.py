@@ -1,11 +1,11 @@
 import pandas as pd
 
-from movies.dataprocessing.money_dataprocessing import convert_money_columns
-from movies.dataprocessing.movie_dataprocessing import (
+from dataprocessing.money_dataprocessing import convert_money_columns
+from dataprocessing.movie_dataprocessing import (
     define_types,
     clean_release_column,
 )
-from movies.dataprocessing.time_dataprocessing import format_time_to_minutes
+from dataprocessing.time_dataprocessing import format_time_to_minutes
 
 
 def clean_lists(df: pd.DataFrame, column: str) -> pd.DataFrame:

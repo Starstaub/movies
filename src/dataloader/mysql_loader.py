@@ -2,13 +2,13 @@ import time
 
 import pyodbc
 
-from movies.dataloader.mongodb_loader import read_mongo
-from movies.dataprocessing.data_preprocessing import clean_dataframe
+from dataloader.mongodb_loader import read_mongo
+from dataprocessing.data_preprocessing import clean_dataframe
 
 from sqlalchemy import create_engine
 from sqlalchemy.pool import StaticPool
 
-from movies.db_config import DB_SETTINGS
+from db_config import DB_SETTINGS
 
 import logging
 

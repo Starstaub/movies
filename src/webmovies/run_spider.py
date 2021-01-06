@@ -2,7 +2,7 @@ import time
 from scrapy.crawler import CrawlerProcess
 
 from scrapy.utils.project import get_project_settings
-from movies.webmovies.spiders.imdb_spider import ImdbSpider
+from webmovies.spiders.imdb_spider import ImdbSpider
 
 
 if __name__ == "__main__":

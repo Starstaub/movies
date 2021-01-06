@@ -3,7 +3,7 @@ import pytest
 import pandas as pd
 from pandas._testing import assert_frame_equal
 
-from movies.dataprocessing.machinelearningmodels import (
+from dataprocessing.machinelearningmodels import (
     get_genres_dummies,
     encode_column, model_df,
 )

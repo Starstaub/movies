@@ -3,7 +3,7 @@ import logging
 from pymongo import MongoClient
 from scrapy.exceptions import DropItem
 
-from movies.webmovies.settings import (
+from webmovies.settings import (
     MONGODB_SERVER,
     MONGODB_PORT,
     MONGODB_DB,

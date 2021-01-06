@@ -2,7 +2,7 @@ from wtforms import StringField, SelectField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 
-from movies.utils import FIELDS, ORDER
+from utils import FIELDS, ORDER
 
 
 class MovieSearchForm(FlaskForm):
