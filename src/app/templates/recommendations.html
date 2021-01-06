@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+
+    <h1>Recommendations for</h1>
+
+    <div class="recommended_container">
+
+        <div class="recommendations_left">
+            <img src="{{ initial_movie['poster'] }}" alt="poster" class="recommended_poster">
+            <a href=" {{ url_for('search',
+                        chosen_type=chosen_type,
+                        string_search=string_search,
+                        chosen_column=chosen_column) }}" class="recommended_back_link"><strong><</strong> Back to results</a>
+        </div>
+
+        <div class="recommendations_right">
+            <div class="recommended_title">{{ initial_movie["movie_title"] }}</div>
+            <div class="recommended_year">
+                {% if not initial_movie["title_year"] == "" %}
+                ({{ initial_movie["title_year"] }}, {{ initial_movie["imdb_score"] }}/10)
+                {% else %}
+                ({{ initial_movie["imdb_score"] }})
+                {% endif %}
+            </div>
+            {% if not initial_movie["director"] == [] %}
+                <div class="recommended_headperson"><strong>Directed by:</strong> {{ ", ".join(initial_movie["director"]) }}</div>
+            {% elif not initial_movie["creator"] == [] %}
+                <div class="recommended_headperson"><strong>Created by:</strong> {{ ", ".join(initial_movie["creator"]) }}</div>
+            {% endif %}
+            <div class="recommended_storyline">
+                <strong>Storyline:</strong>
+                <div class="recommended_storyline_container">{{ initial_movie["storyline"] }}</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="results_container">
+        <ul>
+            {% for i in results.index %}
+                {% include '_items.html' %}
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+
+{% endblock %}

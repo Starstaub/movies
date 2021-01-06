@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 from pandas._testing import assert_frame_equal
 
-from movies.dataprocessing.data_preprocessing import (
+from dataprocessing.data_preprocessing import (
     remove_doubles,
     clean_lists,
     clean_list_columns, clean_dataframe,

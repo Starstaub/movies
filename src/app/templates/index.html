@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div id="search_bar" style="margin-top: 150px">
+    <form method="POST" action="/">
+        {{ form.csrf_token}}
+        {{ form.chosen_type.label }}{{ form.chosen_type(class="dropdown_list") }}
+        {{ form.string_search(class="string_field") }}
+        {{ form.chosen_column_order.label }}{{ form.chosen_column_order(class="dropdown_list") }}
+    <input type="submit" value="Submit" class="submit_button">
+    </form>
+    </div>
+
+    <section>
+        {% include '_messages.html' %}
+    </section>
+</main>
+
+{% endblock %}
