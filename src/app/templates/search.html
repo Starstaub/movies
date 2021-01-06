@@ -14,11 +14,11 @@
     </div>
     <section>
         {% include '_messages.html' %}
-        {% if not results.empty %}
+        {% if results %}
             <h1>Results</h1>
             <div class="results_container">
                 <ul>
-                    {% for i in results.index %}
+                    {% for movie in results %}
                         {% include '_items.html' %}
                     {% endfor %}
                 </ul>
