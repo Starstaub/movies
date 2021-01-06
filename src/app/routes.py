@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from werkzeug.utils import redirect
 
+from app.models import Movies
 from dataloader.mongodb_loader import read_mongo
 from dataprocessing.machinelearningmodels import get_predictions
 from app.forms import MovieSearchForm
@@ -12,21 +13,11 @@ from app.forms import MovieSearchForm
 from app import app
 
 
-def get_movie(df, chosen_type, string_search, chosen_column):
+def get_movie(chosen_type, string_search, chosen_column):
 
-    if chosen_type == "movie_title":
-        return df[
-            df[chosen_type].str.lower().str.contains(string_search.lower())
-        ].sort_values(by=chosen_column)
-
-    else:
-        return df[
-            df[chosen_type]
-            .astype(str)
-            .str.lower()
-            .transform(ast.literal_eval)
-            .map({string_search.lower()}.issubset)
-        ].sort_values(by=chosen_column)
+    return Movies.query.filter(
+        getattr(Movies, chosen_type).contains(string_search)
+    ).order_by(chosen_column)
 
 
 def get_key(val, tuple_to_search):
@@ -41,18 +32,18 @@ def get_key(val, tuple_to_search):
 @app.route("/", methods=["GET", "POST"])
 def index():
 
-    df = read_mongo("movies", "movie_data")
     form = MovieSearchForm()
-    results = pd.DataFrame()
+    results = None
 
     if form.validate_on_submit():
+
         chosen_type = form.chosen_type.data
         string_search = form.string_search.data
         chosen_column = form.chosen_column_order.data
 
-        results = get_movie(df, chosen_type, string_search.strip(), chosen_column)
+        results = get_movie(chosen_type, string_search.strip(), chosen_column)
 
-        if not results.empty:
+        if results.first() is not None:
             return redirect(
                 url_for(
                     "search",
@@ -76,14 +67,13 @@ def search():
     string_search = request.args.get("string_search")
     chosen_column = request.args.get("chosen_column")
 
-    df = read_mongo("movies", "movie_data")
     form = MovieSearchForm(
         chosen_type=chosen_type,
         string_search=string_search,
         chosen_column_order=chosen_column,
     )
 
-    results = get_movie(df, chosen_type, string_search.strip(), chosen_column)
+    results = get_movie(chosen_type, string_search.strip(), chosen_column)
 
     return render_template(
         "search.html",
