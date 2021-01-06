@@ -9,7 +9,7 @@
     <div class="recommended_container">
 
         <div class="recommendations_left">
-            <img src="{{ initial_movie['poster'] }}" alt="poster" class="recommended_poster">
+            <img src="{{ initial_movie.poster }}" alt="poster" class="recommended_poster">
             <a href=" {{ url_for('search',
                         chosen_type=chosen_type,
                         string_search=string_search,
@@ -17,22 +17,22 @@
         </div>
 
         <div class="recommendations_right">
-            <div class="recommended_title">{{ initial_movie["movie_title"] }}</div>
+            <div class="recommended_title">{{ initial_movie.movie_title }}</div>
             <div class="recommended_year">
-                {% if not initial_movie["title_year"] == "" %}
-                ({{ initial_movie["title_year"] }}, {{ initial_movie["imdb_score"] }}/10)
+                {% if not initial_movie.title_year == "" %}
+                    ({{ initial_movie.title_year }}, {{ initial_movie.imdb_score }}/10)
                 {% else %}
-                ({{ initial_movie["imdb_score"] }})
+                    ({{ initial_movie.imdb_score }})
                 {% endif %}
             </div>
-            {% if not initial_movie["director"] == [] %}
-                <div class="recommended_headperson"><strong>Directed by:</strong> {{ ", ".join(initial_movie["director"]) }}</div>
-            {% elif not initial_movie["creator"] == [] %}
-                <div class="recommended_headperson"><strong>Created by:</strong> {{ ", ".join(initial_movie["creator"]) }}</div>
+            {% if not list_initial_movie.loc[0, "director"] == [] %}
+                <div class="recommended_headperson"><strong>Directed by:</strong> {{ ", ".join(list_initial_movie.loc[0, "director"]) }}</div>
+            {% elif not list_initial_movie.loc[0, "creator"] == [] %}
+                <div class="recommended_headperson"><strong>Created by:</strong> {{ ", ".join(list_initial_movie.loc[0, "creator"]) }}</div>
             {% endif %}
             <div class="recommended_storyline">
                 <strong>Storyline:</strong>
-                <div class="recommended_storyline_container">{{ initial_movie["storyline"] }}</div>
+                <div class="recommended_storyline_container">{{ initial_movie.storyline }}</div>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
 
     <div class="results_container">
         <ul>
-            {% for i in results.index %}
+            {% for movie in results %}
                 {% include '_items.html' %}
             {% endfor %}
         </ul>
