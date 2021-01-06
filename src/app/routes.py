@@ -1,18 +1,15 @@
 import ast
 
-from flask import Flask, render_template, flash, url_for, request
+from flask import render_template, flash, url_for, request
 import pandas as pd
 import numpy as np
 from werkzeug.utils import redirect
 
-from movies.dataloader.mongodb_loader import read_mongo
-from movies.dataprocessing.machinelearningmodels import get_predictions
-from movies.site.app.forms import MovieSearchForm
+from dataloader.mongodb_loader import read_mongo
+from dataprocessing.machinelearningmodels import get_predictions
+from app.forms import MovieSearchForm
 
-app = Flask(__name__, template_folder="templates")
-
-app.config["SECRET_KEY"] = "niceapp"
-WTF_CSRF_SECRET_KEY = "niceapp"
+from app import app
 
 
 def get_movie(df, chosen_type, string_search, chosen_column):
