@@ -29,3 +29,33 @@ def clean_list_results(results):
         list_results[col] = list_results[col].apply(literal_eval)
 
     return list_results
+
+
+def clean_ml_food(results):
+
+    ml_food = pd.DataFrame(
+        {
+            "index": [i.index for i in results],
+            "genres": [i.genres for i in results],
+            "certificate": [i.certificate for i in results],
+            "imdb_score": [i.imdb_score for i in results],
+        }
+    ).set_index("index")
+    ml_food["genres"] = ml_food["genres"].apply(literal_eval)
+
+    return ml_food
+
+
+def clean_lists(results):
+
+    list_results = pd.DataFrame(
+        {
+            "director": [results.director],
+            "creator": [results.creator],
+        }
+    )
+
+    for col in list_results.columns:
+        list_results[col] = list_results[col].apply(literal_eval)
+
+    return list_results
