@@ -7,7 +7,7 @@ import logging
 from pymongo.database import Database
 from pymongo.errors import OperationFailure
 
-from movies.dataprocessing.data_preprocessing import clean_dataframe
+from dataprocessing.data_preprocessing import clean_dataframe
 
 
 def _connect_mongo(
@@ -55,7 +55,7 @@ def read_mongo(
     if no_id:
         del df["_id"]
 
-    return df.reset_index()
+    return df
 
 
 def run_once(
@@ -85,6 +85,8 @@ def run_once(
     _ = cursor.delete_many({})
 
     movie_data = clean_dataframe(df.copy()).to_dict("records")
+
+    print(df.columns)
     cursor.insert_many(movie_data)
 
     return True
