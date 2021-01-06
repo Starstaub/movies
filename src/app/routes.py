@@ -1,10 +1,8 @@
 from flask import render_template, flash, url_for, request
-import numpy as np
 from werkzeug.utils import redirect
 
 from app.models import Movies
-from app.modules import get_movie, clean_list_results
-from dataloader.mongodb_loader import read_mongo
+from app.modules import get_movie, clean_list_results, clean_ml_food, clean_lists
 from dataprocessing.machinelearningmodels import get_predictions
 from app.forms import MovieSearchForm
 
@@ -93,21 +91,29 @@ def details(id):
 @app.route("/recommendations/<string:id>")
 def recommendations(id):
 
-    df = read_mongo("movies", "movie_data")
+    results = Movies.query.with_entities(
+        Movies.index, Movies.genres, Movies.certificate, Movies.imdb_score
+    ).all()
+    df = clean_ml_food(results)
 
     chosen_type = request.args.get("chosen_type")
     string_search = request.args.get("string_search")
     chosen_column = request.args.get("chosen_column")
 
     indexes = get_predictions(df, int(id))[0]
-    indexes = np.delete(indexes, np.where(indexes == int(id)))
-    results = df.iloc[indexes]
-    initial_movie = df.iloc[int(id)]
+    indexes = [str(i) for i in indexes if i != int(id)]
+
+    results = Movies.query.filter(Movies.index.in_(indexes)).all()
+    results = [next(s for s in results if s.index == int(idx)) for idx in indexes]
+    initial_movie = Movies.query.filter(Movies.index == int(id)).first()
+
+    list_initial_movie = clean_lists(initial_movie)
 
     return render_template(
         "recommendations.html",
         initial_movie=initial_movie,
         results=results,
+        list_initial_movie=list_initial_movie,
         title="Recommendations - MovieDB",
         chosen_type=chosen_type,
         string_search=string_search,
