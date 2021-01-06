@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 
 from dataloader.mongodb_loader import read_mongo
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+database_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "app.db"))
 
 
 def run_once() -> bool:
@@ -16,17 +16,19 @@ def run_once() -> bool:
         print(df.columns)
     except Exception as e:
         logging.info(
-            "Something went wrong with the connection to MongoDB and the retrieving of data: {}".format(
-                e
-            )
+            "Something went wrong with the connection to MongoDB: {}".format(e)
         )
         return False
 
-    engine = create_engine(
-        "sqlite:///" + "/Users/mary/git/movies/src/app.db", echo=False
-    )
+    engine = create_engine("sqlite:///" + database_path, echo=False)
 
-    df[["stars", "director", "creator", "writer", "plot_keywords", "genres", "country"]] = df[["stars", "director", "creator", "writer", "plot_keywords", "genres", "country"]].astype(str)
+    df[
+        ["stars", "director", "creator", "writer", "plot_keywords", "genres", "country"]
+    ] = df[
+        ["stars", "director", "creator", "writer", "plot_keywords", "genres", "country"]
+    ].astype(
+        str
+    )
 
     df.to_sql(
         name="movies",
