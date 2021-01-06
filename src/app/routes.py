@@ -1,43 +1,14 @@
-from ast import literal_eval
-
 from flask import render_template, flash, url_for, request
-import pandas as pd
 import numpy as np
 from werkzeug.utils import redirect
 
 from app.models import Movies
+from app.modules import get_movie, clean_list_results
 from dataloader.mongodb_loader import read_mongo
 from dataprocessing.machinelearningmodels import get_predictions
 from app.forms import MovieSearchForm
 
 from app import app
-
-
-def get_movie(chosen_type, string_search, chosen_column):
-
-    return Movies.query.filter(
-        getattr(Movies, chosen_type).contains(string_search)
-    ).order_by(chosen_column)
-
-
-def clean_list_results(results):
-
-    list_results = pd.DataFrame(
-        {
-            "stars": [results.stars],
-            "director": [results.director],
-            "plot_keywords": [results.plot_keywords],
-            "writer": [results.writer],
-            "creator": [results.creator],
-            "genres": [results.genres],
-            "country": [results.country],
-        }
-    )
-
-    for col in list_results.columns:
-        list_results[col] = list_results[col].apply(literal_eval)
-
-    return list_results
 
 
 @app.route("/", methods=["GET", "POST"])
