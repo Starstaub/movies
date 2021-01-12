@@ -25,11 +25,11 @@
             </div>
 
             {% if prev_url %}
-                <a href="{{ prev_url }}"><strong><</strong> Previous results</a>
+                <a href="{{ prev_url }}"><</a>
             {% endif %}
             {{ page }}/{{ pages }}
             {% if next_url %}
-                <a href="{{ next_url }}">Next results <strong>></strong></a>
+                <a href="{{ next_url }}">></a>
             {% endif %}
 
         {% endif %}
