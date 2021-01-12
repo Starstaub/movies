@@ -1,0 +1,13 @@
+<div class="search_bar">
+    <form method="POST" action="/">
+        {{ form.csrf_token}}
+        <div class="search_label">{{ form.chosen_type.label }}</div>
+        <div class="search_form">
+            {{ form.chosen_type(class="dropdown_list") }}{{ form.string_search(class="string_field") }}<br>
+            {{ form.chosen_column_order.label }}{{ form.chosen_column_order(class="dropdown_list") }}{{ form.chosen_order(class="dropdown_list") }}
+        </div>
+        <div class="search_submit">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>

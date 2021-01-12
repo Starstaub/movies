@@ -1,8 +1,7 @@
 .results_container > ul {
     display: flex;
     flex-wrap: wrap;
-    margin: auto;
-    margin-bottom: 25px;
+    margin: auto auto 25px;
 }
 
 .results_container > ul > li {
