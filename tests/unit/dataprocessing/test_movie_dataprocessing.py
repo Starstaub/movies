@@ -1,6 +1,6 @@
 import pytest
 
-from movies.dataprocessing.movie_dataprocessing import (
+from dataprocessing.movie_dataprocessing import (
     define_types,
     clean_release_column,
 )

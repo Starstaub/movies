@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <div class="details_container">
+
+        <div class="details_container_header">{{ results.movie_title }}</div>
+
+            <div class="details_left">
+
+                <a href="{{ results.big_poster }}" target="_blank">
+                    <img src="{{ results.poster }}" alt="poster" class="details_poster">
+                </a>
+
+                <div class="details_imdb_score">
+                    <strong>{{ results.imdb_score }}</strong>/10
+                </div>
+
+                <a href=" {{ url_for('search', chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, chosen_order=chosen_order, page=page) }}" class="details_back_link"><strong><</strong> Back to results</a>
+
+            </div>
+
+            <div class="details_right">
+
+                {% if not results.title_year == "" %}
+                <h2>{{ results.movie_title }} ({{ results.title_year }})</h2>
+                {% else %}
+                <h2>{{ results.movie_title }}</h2>
+                {% endif %}
+
+                <div class="details_certificate" style="display:block; text-align: center;">
+                    {% if not results.certificate == "" %}
+                        <span class="details_top_element">{{ results.certificate }}</span>
+                    {% endif %}
+
+                    {% if not results.type == "Other" %}
+                        <span class="details_top_element">{{ results.type }}</span>
+                    {% else %}
+                        <span class="details_top_element">Movie</span>
+                    {% endif %}
+
+                    {% if not results.duration == "" %}
+                        {% if not results.duration == 0 %}
+                            <span class="details_top_element">{{ results.duration }} minutes</span>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if not results.episode_count == "" %}
+                        <span class="details_top_element">{{ results.episode_count }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="details_tab_container">
+
+                    <div id="details_bar">
+                      <button class="details_item_1" onclick="openCategory('cat_general')">Story</button>
+                      <button class="details_item_2" onclick="openCategory('cat_details')">Details</button>
+                    </div>
+
+                    <div id="cat_general" class="category">
+
+                        {% if not results.storyline == "" %}
+                            <div class="details_element_line details_element_storyline">
+                                <strong>Storyline:</strong>
+                                <div class="details_storyline">
+                                     {{ results.storyline }}
+                                </div>
+                            </div>
+                        {% endif %}
+
+
+                        {% if not list_results.loc[0, "plot_keywords"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Plot keywords:</strong> {{ ", ".join(list_results.loc[0, "plot_keywords"]) }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div id="cat_details" class="category" style="display:none">
+
+                        {% if not results.release == "" %}
+                            <div class="details_element_line">
+                                <strong>Released:</strong> {{ results.release }}
+                            </div>
+                        {% endif %}
+
+                        {% if not results.original_title == "" %}
+                            <div class="details_element_line">
+                                <strong>Original title:</strong> {{ results.original_title }}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "country"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Country:</strong> {{ ", ".join(list_results.loc[0, "country"]) }}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "director"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Director-s:</strong>
+                                {% for dir in list_results.loc[0, "director"] %}
+                                    <a href="{{ url_for('search', chosen_type='director',
+                                    string_search=dir,
+                                    chosen_column='index') }}" class="details_redirect">{{ dir }} ></a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "creator"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Creator-s:</strong> {{ ", ".join(list_results.loc[0, "creator"]) }}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "writer"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Writer-s:</strong> {{ ", ".join(list_results.loc[0, "writer"]) }}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "stars"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Stars:</strong>
+                                {% for sta in list_results.loc[0, "stars"] %}
+                                    <a href="{{ url_for('search', chosen_type='stars',
+                                    string_search=sta,
+                                    chosen_column='index') }}" class="details_redirect">{{ sta }} ></a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% if not list_results.loc[0, "genres"] == [] %}
+                            <div class="details_element_line">
+                                <strong>Genres:</strong>
+                                {% for gen in list_results.loc[0, "genres"] %}
+                                    <a href="{{ url_for('search', chosen_type='genres',
+                                    string_search=gen,
+                                    chosen_column='index') }}" class="details_redirect">{{ gen }} ></a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+<li>
+    <img src="{{ movie.poster }}" alt="poster" class="results_poster">
+
+    <div class="results_details">
+        <div class="results_title">{{ movie.movie_title }}</div>
+
+        <div class="results_year">
+            {% if movie.title_year %}
+            ({{ movie.title_year }}, {{ movie.imdb_score }}/10)
+            {% else %}
+            ({{ movie.imdb_score }}/10)
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="results_link_container">
+        <a href="{{ url_for('details', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, chosen_order=chosen_order, page=page) }}" class="results_link_details">Details</a>
+        <a href="{{ url_for('recommendations', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, chosen_order=chosen_order, page=page) }}" class="results_link_reco">More like</a>
+    </div>
+</li>
