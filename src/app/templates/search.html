@@ -18,14 +18,15 @@
             </ul>
         </div>
 
-        {% if prev_url %}
-            <a href="{{ prev_url }}"><</a>
+        {% if pages > 1 %}
+            {% if prev_url %}
+                <a href="{{ prev_url }}"><</a>
+            {% endif %}
+            {{ page }}/{{ pages }}
+            {% if next_url %}
+                <a href="{{ next_url }}">></a>
+            {% endif %}
         {% endif %}
-        {{ page }}/{{ pages }}
-        {% if next_url %}
-            <a href="{{ next_url }}">></a>
-        {% endif %}
-
     </section>
 </main>
 
