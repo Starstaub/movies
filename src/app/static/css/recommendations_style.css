@@ -19,7 +19,6 @@
     border-radius: 10px;
     display: block;
     float: left;
-    margin-right: 8px;
     width: 110px;
     height: auto;
     margin: 0;
@@ -91,5 +90,4 @@
 
 .recommended_storyline_container::-webkit-scrollbar-track {
     border-top-right-radius: 10px;
-    /* border-right: 1px solid black; */
 }

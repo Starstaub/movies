@@ -69,7 +69,7 @@
 
 .details_right {
     overflow: hidden;
-    padding: 15px 15px 15px 0px;
+    padding: 15px 15px 15px 0;
 }
 
 .details_tab_container {
@@ -130,7 +130,6 @@
 
 .details_storyline::-webkit-scrollbar-track {
     border-top-right-radius: 10px;
-    /* border-right: 1px solid black; */
 }
 
 h2 {
@@ -143,7 +142,6 @@ h2 {
     border: 1px dotted black;
     border-radius: 5px;
     padding: 5px 10px;
-    display: block inline;
     font-size: 10px;
 }
 
