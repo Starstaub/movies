@@ -31,10 +31,7 @@ def run_once() -> bool:
     )
 
     df.to_sql(
-        name="movies",
-        con=engine,
-        if_exists="replace",
-        chunksize=1000,
+        name="movies", con=engine, if_exists="replace", chunksize=1000,
     )
 
     return True

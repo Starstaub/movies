@@ -33,9 +33,7 @@ def run_once() -> bool:
         df = read_mongo("movies", "movie_data")
     except Exception as e:
         logging.info(
-            "Something went wrong with the connection to MongoDB: {}".format(
-                e
-            )
+            "Something went wrong with the connection to MongoDB: {}".format(e)
         )
         return False
 

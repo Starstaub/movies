@@ -28,4 +28,4 @@ class Movies(db.Model):
     type = db.Column(db.String(20))
 
     def __repr__(self):
-        return '<Movie {}>'.format(self.movie_title)
+        return "<Movie {}>".format(self.movie_title)

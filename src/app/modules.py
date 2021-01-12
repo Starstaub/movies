@@ -49,10 +49,7 @@ def clean_ml_food(results):
 def clean_lists(results):
 
     list_results = pd.DataFrame(
-        {
-            "director": [results.director],
-            "creator": [results.creator],
-        }
+        {"director": [results.director], "creator": [results.creator],}
     )
 
     for col in list_results.columns:
