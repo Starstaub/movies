@@ -23,6 +23,15 @@
                     {% endfor %}
                 </ul>
             </div>
+
+            {% if prev_url %}
+                <a href="{{ prev_url }}"><strong><</strong> Previous results</a>
+            {% endif %}
+            {{ page }}/{{ pages }}
+            {% if next_url %}
+                <a href="{{ next_url }}">Next results <strong>></strong></a>
+            {% endif %}
+
         {% endif %}
     </section>
 </main>

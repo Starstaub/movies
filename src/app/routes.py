@@ -53,12 +53,41 @@ def search():
         chosen_column_order=chosen_column,
     )
 
-    results = get_movie(chosen_type, string_search.strip(), chosen_column)
+    page = request.args.get("page", 1, type=int)
+    results = get_movie(chosen_type, string_search.strip(), chosen_column).paginate(
+        page, app.config["POSTS_PER_PAGE"], False
+    )
+    next_url = (
+        url_for(
+            "search",
+            chosen_type=chosen_type,
+            string_search=string_search,
+            chosen_column=chosen_column,
+            page=results.next_num,
+        )
+        if results.has_next
+        else None
+    )
+    prev_url = (
+        url_for(
+            "search",
+            chosen_type=chosen_type,
+            string_search=string_search,
+            chosen_column=chosen_column,
+            page=results.prev_num,
+        )
+        if results.has_prev
+        else None
+    )
 
     return render_template(
         "search.html",
-        results=results,
+        results=results.items,
         form=form,
+        next_url=next_url,
+        prev_url=prev_url,
+        page=results.page,
+        pages=results.pages,
         title="Results - MovieDB",
         chosen_type=chosen_type,
         string_search=string_search,
@@ -74,6 +103,7 @@ def details(id):
     chosen_type = request.args.get("chosen_type")
     string_search = request.args.get("string_search")
     chosen_column = request.args.get("chosen_column")
+    page = request.args.get("page", 1, type=int)
 
     list_results = clean_list_results(results)
 
@@ -85,6 +115,7 @@ def details(id):
         chosen_type=chosen_type,
         string_search=string_search,
         chosen_column=chosen_column,
+        page=page,
     )
 
 
@@ -99,6 +130,7 @@ def recommendations(id):
     chosen_type = request.args.get("chosen_type")
     string_search = request.args.get("string_search")
     chosen_column = request.args.get("chosen_column")
+    page = request.args.get("page", 1, type=int)
 
     indexes = get_predictions(df, int(id))[0]
     indexes = [str(i) for i in indexes if i != int(id)]
@@ -118,4 +150,5 @@ def recommendations(id):
         chosen_type=chosen_type,
         string_search=string_search,
         chosen_column=chosen_column,
+        page=page,
     )
