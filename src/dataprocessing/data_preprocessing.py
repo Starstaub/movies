@@ -28,7 +28,15 @@ def remove_doubles(df: pd.DataFrame, column: str) -> pd.DataFrame:
 
 def clean_list_columns(df: pd.DataFrame) -> pd.DataFrame:
 
-    col_list = ["stars", "genres", "plot_keywords", "director", "writer", "country", "creator"]
+    col_list = [
+        "stars",
+        "genres",
+        "plot_keywords",
+        "director",
+        "writer",
+        "country",
+        "creator",
+    ]
     for col in col_list:
         df[col] = df[col].apply(
             lambda value: value if isinstance(value, list) else list()
@@ -52,7 +60,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         .str.replace("Unrated", "Not Rated")
         .str.replace("Tous Public", "Tous publics")
     )
-    df = df[df['imdb_score'] != ""].copy()
+    df = df[df["imdb_score"] != ""].copy()
     df.drop(
         columns=["currency", "currency_value"], inplace=True,
     )

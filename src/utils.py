@@ -30,9 +30,14 @@ FIELDS = [
     ("genres", "Genre"),
 ]
 
-ORDER = [
+COLUMNS = [
     ("index", "Default"),
     ("title_year", "Year"),
     ("movie_title", "Title"),
     ("imdb_score", "IMDB Score"),
+]
+
+ORDER = [
+    ("asc", "Ascending"),
+    ("desc", "Descending"),
 ]

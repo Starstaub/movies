@@ -8,7 +8,7 @@
         {{ form.csrf_token}}
         {{ form.chosen_type.label }}{{ form.chosen_type(class="dropdown_list") }}
         {{ form.string_search(class="string_field") }}
-        {{ form.chosen_column_order.label }}{{ form.chosen_column_order(class="dropdown_list") }}
+        {{ form.chosen_column_order.label }}{{ form.chosen_column_order(class="dropdown_list") }}{{ form.chosen_order(class="dropdown_list") }}
     <input type="submit" value="Submit" class="submit_button">
     </form>
     </div>
@@ -23,6 +23,15 @@
                     {% endfor %}
                 </ul>
             </div>
+
+            {% if prev_url %}
+                <a href="{{ prev_url }}"><</a>
+            {% endif %}
+            {{ page }}/{{ pages }}
+            {% if next_url %}
+                <a href="{{ next_url }}">></a>
+            {% endif %}
+
         {% endif %}
     </section>
 </main>

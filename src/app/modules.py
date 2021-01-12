@@ -1,10 +1,17 @@
 from ast import literal_eval
 
+from sqlalchemy import desc
+
 from app.models import Movies
 import pandas as pd
 
 
-def get_movie(chosen_type, string_search, chosen_column):
+def get_movie(chosen_type, string_search, chosen_column, chosen_order):
+
+    if chosen_order == "desc":
+        return Movies.query.filter(
+            getattr(Movies, chosen_type).contains(string_search)
+        ).order_by(desc(chosen_column))
 
     return Movies.query.filter(
         getattr(Movies, chosen_type).contains(string_search)
@@ -49,10 +56,7 @@ def clean_ml_food(results):
 def clean_lists(results):
 
     list_results = pd.DataFrame(
-        {
-            "director": [results.director],
-            "creator": [results.creator],
-        }
+        {"director": [results.director], "creator": [results.creator],}
     )
 
     for col in list_results.columns:

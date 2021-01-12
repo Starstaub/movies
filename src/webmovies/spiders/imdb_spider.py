@@ -17,7 +17,7 @@ class ImdbSpider(Spider):
         self.cnxn = MongoClient("localhost", 27017)
         self.database = self.cnxn["movies"]
 
-        #self._ = self.database["data"].remove()
+        # self._ = self.database["data"].remove()
 
         self.movie_urls = self.database["movie_urls"]
         self.start_urls = pd.DataFrame(list(self.movie_urls.find()))[

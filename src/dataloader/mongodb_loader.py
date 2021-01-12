@@ -11,11 +11,7 @@ from dataprocessing.data_preprocessing import clean_dataframe
 
 
 def _connect_mongo(
-        host: str,
-        port: int,
-        username: str,
-        password: str,
-        database: str
+    host: str, port: int, username: str, password: str, database: str
 ) -> Database:
 
     if username and password:
