@@ -14,7 +14,7 @@
     </div>
 
     <div class="results_link_container">
-        <a href="{{ url_for('details', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, page=page) }}" class="results_link_details">Details</a>
-        <a href="{{ url_for('recommendations', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, page=page) }}" class="results_link_reco">More like</a>
+        <a href="{{ url_for('details', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, chosen_order=chosen_order, page=page) }}" class="results_link_details">Details</a>
+        <a href="{{ url_for('recommendations', id=movie.index, chosen_type=chosen_type, string_search=string_search, chosen_column=chosen_column, chosen_order=chosen_order, page=page) }}" class="results_link_reco">More like</a>
     </div>
 </li>
