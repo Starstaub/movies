@@ -9,7 +9,11 @@
     <div class="recommended_container">
 
         <div class="recommendations_left">
-            <img src="{{ initial_movie.poster }}" alt="poster" class="recommended_poster">
+            {% if initial_movie.poster != "" %}
+                <img src="{{ initial_movie.poster }}" alt="poster" class="recommended_poster">
+            {% else %}
+                <img src="https://i.ibb.co/1vQTKZM/no-poster.jpg" alt="no poster" class="recommended_poster">
+            {% endif %}
             <a href=" {{ url_for('search',
                         chosen_type=chosen_type,
                         string_search=string_search,
@@ -27,7 +31,13 @@
                 {% endif %}
             </div>
             {% if not list_initial_movie.loc[0, "director"] == [] %}
-                <div class="recommended_headperson"><strong>Directed by:</strong> {{ ", ".join(list_initial_movie.loc[0, "director"]) }}</div>
+                <div class="recommended_headperson"><strong>Directed by:</strong>
+                    {% for dir in list_initial_movie.loc[0, "director"] %}
+                        <a href="{{ url_for('search', chosen_type='director',
+                        string_search=dir,
+                        chosen_column='index') }}" class="details_redirect">{{ dir }} <strong>></strong></a>
+                    {% endfor %}
+                </div>
             {% elif not list_initial_movie.loc[0, "creator"] == [] %}
                 <div class="recommended_headperson"><strong>Created by:</strong> {{ ", ".join(list_initial_movie.loc[0, "creator"]) }}</div>
             {% endif %}

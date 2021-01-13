@@ -9,9 +9,15 @@
 
             <div class="details_left">
 
-                <a href="{{ results.big_poster }}" target="_blank">
-                    <img src="{{ results.poster }}" alt="poster" class="details_poster">
-                </a>
+                {% if results.poster != "" %}
+                    <a href="{{ results.big_poster }}" target="_blank">
+                        <img src="{{ results.poster }}" alt="poster" class="details_poster">
+                    </a>
+                {% else %}
+                    <img src="https://i.ibb.co/1vQTKZM/no-poster.jpg" alt="no poster" class="details_poster">
+                {% endif %}
+
+
 
                 <div class="details_imdb_score">
                     <strong>{{ results.imdb_score }}</strong>/10
@@ -104,7 +110,7 @@
                                 {% for dir in list_results.loc[0, "director"] %}
                                     <a href="{{ url_for('search', chosen_type='director',
                                     string_search=dir,
-                                    chosen_column='index') }}" class="details_redirect">{{ dir }} ></a>
+                                    chosen_column='index') }}" class="details_redirect">{{ dir }} <strong>></strong></a>
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -127,7 +133,7 @@
                                 {% for sta in list_results.loc[0, "stars"] %}
                                     <a href="{{ url_for('search', chosen_type='stars',
                                     string_search=sta,
-                                    chosen_column='index') }}" class="details_redirect">{{ sta }} ></a>
+                                    chosen_column='index') }}" class="details_redirect">{{ sta }} <strong>></strong></a>
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -138,7 +144,7 @@
                                 {% for gen in list_results.loc[0, "genres"] %}
                                     <a href="{{ url_for('search', chosen_type='genres',
                                     string_search=gen,
-                                    chosen_column='index') }}" class="details_redirect">{{ gen }} ></a>
+                                    chosen_column='index') }}" class="details_redirect">{{ gen }} <strong>></strong></a>
                                 {% endfor %}
                             </div>
                         {% endif %}
