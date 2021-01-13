@@ -9,9 +9,15 @@
 
             <div class="details_left">
 
-                <a href="{{ results.big_poster }}" target="_blank">
-                    <img src="{{ results.poster }}" alt="poster" class="details_poster">
-                </a>
+                {% if results.poster != "" %}
+                    <a href="{{ results.big_poster }}" target="_blank">
+                        <img src="{{ results.poster }}" alt="poster" class="details_poster">
+                    </a>
+                {% else %}
+                    <img src="https://i.ibb.co/1vQTKZM/no-poster.jpg" alt="no poster" class="details_poster">
+                {% endif %}
+
+
 
                 <div class="details_imdb_score">
                     <strong>{{ results.imdb_score }}</strong>/10

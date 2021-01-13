@@ -9,7 +9,11 @@
     <div class="recommended_container">
 
         <div class="recommendations_left">
-            <img src="{{ initial_movie.poster }}" alt="poster" class="recommended_poster">
+            {% if initial_movie.poster != "" %}
+                <img src="{{ initial_movie.poster }}" alt="poster" class="recommended_poster">
+            {% else %}
+                <img src="https://i.ibb.co/1vQTKZM/no-poster.jpg" alt="no poster" class="recommended_poster">
+            {% endif %}
             <a href=" {{ url_for('search',
                         chosen_type=chosen_type,
                         string_search=string_search,

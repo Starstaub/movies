@@ -1,5 +1,10 @@
 <li>
-    <img src="{{ movie.poster }}" alt="poster" class="results_poster">
+
+    {% if movie.poster != "" %}
+        <img src="{{ movie.poster }}" alt="poster" class="results_poster">
+    {% else %}
+        <img src="https://i.ibb.co/1vQTKZM/no-poster.jpg" alt="no poster" class="results_poster">
+    {% endif %}
 
     <div class="results_details">
         <div class="results_title">{{ movie.movie_title }}</div>
