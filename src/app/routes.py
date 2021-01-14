@@ -58,9 +58,11 @@ def search():
     )
 
     page = request.args.get("page", 1, type=int)
-    results = get_movie(chosen_type, string_search.strip(), chosen_column, chosen_order).paginate(
+    data = get_movie(chosen_type, string_search.strip(), chosen_column, chosen_order)
+    results = data.paginate(
         page, app.config["POSTS_PER_PAGE"], False
     )
+    count = data.count()
     next_url = (
         url_for(
             "search",
@@ -90,6 +92,7 @@ def search():
         "search.html",
         results=results.items,
         form=form,
+        count=count,
         next_url=next_url,
         prev_url=prev_url,
         page=results.page,
