@@ -147,7 +147,7 @@ h1 {
     padding-top: 10px;
 }
 
-.search_submit > input {
+.link {
     padding: 8px;
     border: 1px solid #e6e6e6;
     border-radius: 8px;
@@ -161,7 +161,11 @@ h1 {
     cursor: pointer !important;
 }
 
-.search_submit > input:hover {
+.link:hover,
+.details_redirect:hover,
+.details_item_1:hover,
+.details_item_2:hover,
+.nav_links > a:hover {
     color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
