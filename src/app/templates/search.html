@@ -9,7 +9,20 @@
     </section>
 
     <section>
-        <h1>Results</h1>
+
+        {% if pages > 1 %}
+            <div class="nav_links">
+                {% if prev_url %}
+                    <a href="{{ prev_url }}"><</a>
+                {% endif %}
+                {{ page }}/{{ pages }}
+                {% if next_url %}
+                    <a href="{{ next_url }}">></a>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <h1>Results ({{ count }} items found)</h1>
         <div class="results_container">
             <ul>
                 {% for movie in results %}
@@ -19,13 +32,15 @@
         </div>
 
         {% if pages > 1 %}
-            {% if prev_url %}
-                <a href="{{ prev_url }}"><</a>
-            {% endif %}
-            {{ page }}/{{ pages }}
-            {% if next_url %}
-                <a href="{{ next_url }}">></a>
-            {% endif %}
+            <div class="nav_links">
+                {% if prev_url %}
+                    <a href="{{ prev_url }}"><</a>
+                {% endif %}
+                {{ page }}/{{ pages }}
+                {% if next_url %}
+                    <a href="{{ next_url }}">></a>
+                {% endif %}
+            </div>
         {% endif %}
     </section>
 </main>

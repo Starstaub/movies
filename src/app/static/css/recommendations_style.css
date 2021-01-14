@@ -25,27 +25,11 @@
     margin: 0;
 }
 
-.recommended_back_link {
+.recommended_back {
     float:left;
     display: block;
     width: 110px;
     margin: 10px 0;
-    padding: 8px;
-    border: 1px solid #e6e6e6;
-    border-radius: 8px;
-    box-shadow: 1px 1px 5px 2px #e6e6e6;
-    font-size: 11px;
-    text-align: center;
-    font-family: Futura, sans serif;
-    text-decoration: none;
-    color: black;
-    background-color: #FBFBFB;
-    cursor: pointer !important;
-}
-
-.recommended_back_link:hover {
-    color: black;
-    background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
 
 /* RIGHT SIDE */
