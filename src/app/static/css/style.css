@@ -169,3 +169,16 @@ h1 {
     color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
+
+.flashes {
+    border: 1px solid #d27b7b;
+    border-radius: 10px;
+    background-color: #f6c9c9;
+    padding: 10px;
+    width: 550px;
+    margin: auto;
+    font-family: Futura, sans serif;
+    font-size: 12px;
+    list-style: none;
+    color: #d04141;
+}

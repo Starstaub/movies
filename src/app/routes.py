@@ -7,6 +7,7 @@ from dataprocessing.machinelearningmodels import get_predictions
 from app.forms import MovieSearchForm
 
 from app import app
+from utils import FIELDS
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -35,7 +36,8 @@ def index():
                 )
             )
 
-        flash("No results.")
+        types = dict(FIELDS)
+        flash("No results for '{}' in category '{}'.".format(string_search.strip(), types[chosen_type]))
 
     return render_template(
         "index.html", results=results, form=form, title="Home - MovieDB"
