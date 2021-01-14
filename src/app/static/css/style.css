@@ -182,3 +182,16 @@ h1 {
     list-style: none;
     color: #d04141;
 }
+
+.error_link {
+    margin: auto;
+    display: block;
+    width: 59px;
+}
+
+.error_number{
+    font-family: courier, sans serif;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 100px;
+}
