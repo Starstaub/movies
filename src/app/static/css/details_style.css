@@ -64,7 +64,7 @@
 }
 
 .details_back_link:hover {
-    color: black;
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
 
@@ -115,7 +115,7 @@
 }
 
 .details_item_1:hover, .details_item_2:hover {
-    color: black;
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 
 }
@@ -167,7 +167,7 @@ h2 {
 }
 
 .details_redirect:hover {
-    color: black;
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
 

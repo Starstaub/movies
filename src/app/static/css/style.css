@@ -47,7 +47,7 @@ a.header_link {
 
 a.header_link:hover {
     text-decoration: none;
-    color: #D6D6D6;
+    color: #007bff;
 }
 
 /* width */
@@ -162,6 +162,6 @@ h1 {
 }
 
 .search_submit > input:hover {
-    color: black;
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }

@@ -44,7 +44,7 @@
 }
 
 .recommended_back_link:hover {
-    color: black;
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
 }
 
