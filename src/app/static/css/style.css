@@ -47,7 +47,7 @@ a.header_link {
 
 a.header_link:hover {
     text-decoration: none;
-    color: #D6D6D6;
+    color: #007bff;
 }
 
 /* width */
@@ -147,7 +147,7 @@ h1 {
     padding-top: 10px;
 }
 
-.search_submit > input {
+.link {
     padding: 8px;
     border: 1px solid #e6e6e6;
     border-radius: 8px;
@@ -161,7 +161,37 @@ h1 {
     cursor: pointer !important;
 }
 
-.search_submit > input:hover {
-    color: black;
+.link:hover,
+.details_redirect:hover,
+.details_item_1:hover,
+.details_item_2:hover,
+.nav_links > a:hover {
+    color: #007bff;
     background: -webkit-linear-gradient(bottom, #ffffff 0%, #e6e6e6 100%);
+}
+
+.flashes {
+    border: 1px solid #d27b7b;
+    border-radius: 10px;
+    background-color: #f6c9c9;
+    padding: 10px;
+    width: 550px;
+    margin: auto;
+    font-family: Futura, sans serif;
+    font-size: 12px;
+    list-style: none;
+    color: #d04141;
+}
+
+.error_link {
+    margin: auto;
+    display: block;
+    width: 59px;
+}
+
+.error_number{
+    font-family: courier, sans serif;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 100px;
 }
