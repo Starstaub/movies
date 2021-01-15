@@ -36,16 +36,20 @@ header > ul {
 
 header > ul > li {
     display: inline;
-    margin-left: 8px;
 }
 
-a.header_link {
+header > ul > li:nth-child(1) {
+    margin-left: 13px;
+    margin-right: 8px;
+}
+
+.header_link {
     text-decoration: none;
     color: black;
     padding: 5px;
 }
 
-a.header_link:hover {
+.header_link:hover {
     text-decoration: none;
     color: #007bff;
 }
@@ -171,16 +175,16 @@ h1 {
 }
 
 .flashes {
-    border: 1px solid #d27b7b;
+    border: 1px solid #7bb4d2;
     border-radius: 10px;
-    background-color: #f6c9c9;
+    background-color: #bbe3f6;
     padding: 10px;
     width: 550px;
     margin: auto;
     font-family: Futura, sans serif;
     font-size: 12px;
     list-style: none;
-    color: #d04141;
+    color: #007bff;
 }
 
 .error_link {
