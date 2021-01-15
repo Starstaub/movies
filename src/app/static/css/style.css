@@ -199,3 +199,35 @@ h1 {
     text-align: center;
     margin-top: 100px;
 }
+
+.user_form {
+    display: block;
+    text-align: center;
+    font-family: Futura, sans-serif;
+    font-size: 13px;
+}
+
+.user_form > form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.user_form > form > p > span {
+    color: #007bff;
+    font-size: 11px;
+}
+
+.form_center {
+    text-align: center;
+}
+
+.new_user {
+    margin-top: 30px;
+    line-height: 35px;
+}
+
+.user_h1 {
+    margin-top: 60px;
+}
