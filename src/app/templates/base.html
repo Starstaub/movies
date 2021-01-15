@@ -20,6 +20,11 @@
     <ul>
         <li><strong>> MovieDB</strong></li>
         <li><a href="{{ url_for('index') }}" class="header_link">Home</a></li>
+        {% if current_user.is_anonymous %}
+        <li><a href="{{ url_for('login') }}" class="header_link">Login</a></li>
+        {% else %}
+        <li><a href="{{ url_for('logout') }}" class="header_link">Logout</a></li>
+        {% endif %}
     </ul>
 </header>
 
