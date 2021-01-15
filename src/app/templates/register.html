@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+    <h1 class="user_h1">Create your account</h1>
+
+    <div class="user_form">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}<br>
+                {% for error in form.username.errors %}
+                    <span>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.email.label }}<br>
+                {{ form.email(size=32) }}<br>
+                {% for error in form.email.errors %}
+                    <span>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}<br>
+                {% for error in form.password.errors %}
+                    <span>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password2.label }}<br>
+                {{ form.password2(size=32) }}<br>
+                {% for error in form.password2.errors %}
+                    <span>[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p class="form_center">{{ form.submit(class="link") }}</p>
+        </form>
+    </div>
+
+</main>
+{% endblock %}
