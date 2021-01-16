@@ -4,7 +4,6 @@ from flask import render_template, flash, url_for, request
 from flask_login import current_user, logout_user, login_user, login_required
 from werkzeug.urls import url_parse
 from werkzeug.utils import redirect
-from wtforms import ValidationError
 
 from app.models import Movies, User
 from app.modules import get_movie, clean_list_results, clean_ml_food, clean_lists
@@ -190,7 +189,7 @@ def login():
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
             next_page = url_for("index")
-            flash(f"Welcome back {user.username}!")
+            flash(f"Welcome back, {user.username}!")
         return redirect(next_page)
     return render_template("login.html", title="Sign In", form=form)
 
