@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main>
+
+    <p>Username: {{ user.username }}</p>
+    <p>About me: {{ user.about_me }}</p>
+    <p>Last seen: {{ user.last_seen }} (UTC)</p>
+
+</main>
+
+{% endblock %}
