@@ -4,30 +4,35 @@
 
 <main>
 
-    <h1>Edit Profile</h1>
+    <h1 class="user_h1">Edit Profile</h1>
 
     <section>
         {% include '_messages.html' %}
     </section>
 
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.about_me.label }}<br>
-            {{ form.about_me(cols=50, rows=4) }}<br>
-            {% for error in form.about_me.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="user_form">
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32, class="form_boxes") }}<br>
+                {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.about_me.label }}<br>
+                {{ form.about_me(cols=30, rows=4, class="form_boxes") }}<br>
+                {% for error in form.about_me.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p class="form_center">
+                <a href="{{ url_for('user', username=current_user.username) }}" class="link"><strong><</strong> Back to Profile</a>
+                {{ form.submit(class="link") }}
+            </p>
+        </form>
+    </div>
 
 </main>
 
