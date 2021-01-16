@@ -7,6 +7,7 @@
     <p>Username: {{ user.username }}</p>
     <p>About me: {{ user.about_me }}</p>
     <p>Last seen: {{ user.last_seen }} (UTC)</p>
+    <a href="{{ url_for('edit_profile') }}" class="link">Edit profile</a>
 
 </main>
 
